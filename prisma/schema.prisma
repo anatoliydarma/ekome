@@ -1,0 +1,211 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["clientExtensions", "extendedWhereUnique", "fullTextSearch"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model AuthUser {
+    id          String   @id @unique
+    name        String?
+    email       String   @unique
+    phone       String?  @unique
+    role        String   @default("CLIENT")
+    email_verified Boolean @default(false)
+    active      Boolean @default(true)
+    auth_session AuthSession[]
+    auth_key     AuthKey[]
+
+    orders        Order[]
+    addresses      Address[]
+
+    @@map("auth_user")
+}
+
+model AuthSession {
+    id             String @id @unique
+    user_id        String
+    active_expires BigInt
+    idle_expires   BigInt
+    auth_user      AuthUser   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@map("auth_session")
+}
+
+model AuthKey {
+    id              String @id @unique
+    hashed_password String?
+    user_id         String
+    primary_key         Boolean
+    expires         BigInt?
+    auth_user       AuthUser    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@map("auth_key")
+}
+
+model Product {
+    id      Int            @id @default(autoincrement())
+    name    String
+    sub_name    String?
+    slug    String         @unique
+    brand    String?
+    desc    String?
+
+    country     String?
+    sku     String?
+    upc     Int?
+    min_qty     Int        @default(1)
+    status  String         @default("DRAFT")
+    images  Json?
+    popularity Int         @default(0)
+    unit    String?
+    weight  Int?           @default(0)
+    container_weight  Decimal?   @db.Decimal(10,2) @default(0)
+
+    price   Decimal        @db.Decimal(10,2)
+    container_price Decimal?   @db.Decimal(10,2) @default(0)
+    gst     Int?           @default(3)
+
+    created_at   DateTime  @default(now()) @db.Date
+    updated_at   DateTime  @updatedAt
+
+    category_id Int
+    category   Category    @relation(references: [id], fields: [category_id], onDelete: Cascade)
+
+    order_items OrderItems[]
+    properties PropertiesOnProduct[]
+    cart_items CartItem[]
+
+    @@unique([slug, id])
+    @@index([slug, id])
+    @@map("product")
+}
+
+model Property {
+    id      Int         @id @default(autoincrement())
+    name    String      @unique
+    products PropertiesOnProduct[]
+
+    @@unique([id, name])
+    @@index([id])
+    @@map("property")
+}
+
+model PropertiesOnProduct {
+    product    Product     @relation(fields: [product_id], references: [id])
+    product_id  Int // relation scalar field (used in the `@relation` attribute above)
+    property   Property @relation(fields: [property_id], references: [id])
+    property_id Int // relation scalar field (used in the `@relation` attribute above)
+
+    @@id([product_id, property_id])
+    @@map("properties_on_product")
+}
+
+model Category {
+    id      Int         @id @default(autoincrement())
+    name    String      @unique
+    slug    String      @unique
+    desc    String?
+    sort    Int         @default(1)
+    status  Boolean     @default(false)
+    image    Json?
+    products  Product[]
+
+    @@unique([slug, id])
+    @@index([slug, id])
+    @@map("category")
+}
+
+model Order {
+    id          Int         @id @default(autoincrement())
+    number      String?      @unique
+    status      String      @default("pending_payment")
+    amount      Decimal     @db.Decimal(10,2)
+    shipping_cost    Decimal     @db.Decimal(10,2)
+    tax_cost         Decimal     @db.Decimal(10,2)
+    created_at   DateTime    @default(now()) @db.Date
+    updated_at   DateTime    @updatedAt
+    weight  Int?
+
+    client_name        String
+    client_email       String
+    client_phone       String?
+    client_country     String
+    client_address     String
+
+    tracker_number     String?
+
+    user_id     String
+    user        AuthUser        @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    items OrderItems[]
+
+    @@unique([number, id])
+    @@index([id, number])
+    @@map("order")
+}
+
+model OrderItems {
+    id          Int         @id @default(autoincrement())
+    qty         Int
+    price       Decimal     @db.Decimal(10,2)
+
+    order_id     Int
+    order       Order        @relation(references: [id], fields: [order_id], onDelete: Cascade)
+
+    product_id   Int     @unique
+    product     Product  @relation(references: [id], fields: [product_id])
+
+    @@unique([id])
+    @@index([id])
+    @@map("order_items")
+}
+
+model Address {
+    id          Int         @id @default(autoincrement())
+    country     String      @default("FR")
+    city        String
+    street      String
+    zip         String
+    etc         String?
+
+    user_id     String
+    user        AuthUser    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+    @@unique([id])
+    @@index([id])
+    @@map("address")
+}
+
+model Cart {
+    id String @id
+    user_id String?
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    items CartItem[]
+    @@unique([id, user_id])
+    @@map("cart")
+}
+
+model CartItem {
+  id Int @id @default(autoincrement())
+  cart_id String
+  cart Cart @relation(fields: [cart_id], references: [id])
+  product_id Int
+  product Product @relation(fields: [product_id], references: [id])
+  qty Int
+  weight Int
+
+
+  @@unique([id])
+  @@map("cart_items")
+}
