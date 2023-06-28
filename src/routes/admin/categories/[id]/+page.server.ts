@@ -1,18 +1,7 @@
 import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-
-const categorySchema = z.object({
-	// See https://zod.dev/?id=primitives for schema syntax
-	id: z.number().nullable(),
-	name: z.string(),
-	slug: z.string().optional(),
-	desc: z.string().optional().default(''),
-	sort: z.number().optional().default(1),
-	status: z.boolean(),
-	image: z.string().array().optional()
-});
+import { categorySchema } from '$lib/zod';
 
 export const load = async ({ params }) => {
 	let id: any = Number(params.id);

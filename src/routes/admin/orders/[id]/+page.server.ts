@@ -1,40 +1,9 @@
 import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
 import { PRODUCT_UNITS, ORDER_STATUSES, COUNTRIES } from '$lib/consts';
 import { sendDataToSlack, sendEmail } from '$lib/server/utils';
-
-const orderItems = z.object({
-	id: z.number().optional(),
-	qty: z.number(),
-	price: z.coerce.number().multipleOf(0.01),
-	product_id: z.number(),
-	name: z.string().optional(),
-	unit: z.string().optional(),
-	min_qty: z.number().optional(),
-	weight: z.number().optional()
-});
-
-const orderSchema = z.object({
-	// See https://zod.dev/?id=primitives for schema syntax
-	id: z.number().nullable(),
-	number: z.string(),
-	status: z.string().default('processing'),
-	amount: z.coerce.number().multipleOf(0.01),
-	shipping_cost: z.coerce.number().multipleOf(0.01),
-	tax_cost: z.coerce.number().multipleOf(0.01),
-	tracker_number: z.string().nullable().optional(),
-	client_name: z.string(),
-	client_email: z.string(),
-	client_phone: z.string().nullable().optional(),
-	client_country: z.string(),
-	client_address: z.string(),
-	user_id: z.string(),
-	items: z.array(orderItems).min(1),
-	weight: z.number().optional(),
-	created_at: z.string().optional()
-});
+import { orderSchema } from '$lib/zod';
 
 export const load = async ({ params }) => {
 	const id: number | undefined = params.id && params.id !== 'new' ? Number(params.id) : undefined;

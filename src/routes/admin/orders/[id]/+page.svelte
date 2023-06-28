@@ -51,7 +51,7 @@
 		if (
 			selectedProduct &&
 			!$form.items?.find(function (i) {
-				return i.product_id == selectedProduct.id;
+				return i.product_id == selectedProduct?.id;
 			})
 		) {
 			$form.items.push({

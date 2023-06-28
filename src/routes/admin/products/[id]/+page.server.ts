@@ -1,35 +1,8 @@
 import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { PRODUCT_STATUSES, PRODUCT_UNITS, BRANDS, COUNTRIES, GST } from '$lib/consts';
-import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
-
-const productSchema = z.object({
-	// See https://zod.dev/?id=primitives for schema syntax
-	id: z.number().nullable(),
-	name: z.string(),
-	slug: z.string().optional(),
-	desc: z.string().optional().default('').nullable(),
-	sku: z.string().optional().default('').nullable(),
-	upc: z.coerce.number().optional().default(0).nullable(),
-	unit: z.string().default('PIECES'),
-	price: z.coerce.number().multipleOf(0.01).optional().default(0),
-	gst: z.number(),
-	min_qty: z.coerce.number().optional(),
-	status: z.string().default('DRAFT'),
-	category_id: z.number(),
-	images: z.string().array().optional().nullable(),
-	properties: z
-		.object({
-			id: z.number().int().min(1),
-			name: z.string().min(2)
-		})
-		.array()
-		.optional(),
-	brand: z.string().optional().nullable(),
-	country: z.string().optional().nullable(),
-	weight: z.coerce.number().optional().default(0).nullable()
-});
+import { productSchema } from '$lib/zod';
 
 export const load = async ({ params }) => {
 	let id: any = Number(params.id);

@@ -3,7 +3,6 @@ import { error, fail, redirect } from '@sveltejs/kit';
 import { ROLES } from '$lib/consts';
 import { superValidate, setError } from 'sveltekit-superforms/server';
 import { auth } from '$lib/server/lucia';
-
 import { userSchema } from '$lib/zod';
 import { Prisma } from '@prisma/client';
 import { LuciaError } from 'lucia-auth';

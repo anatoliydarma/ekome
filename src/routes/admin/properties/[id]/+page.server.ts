@@ -1,15 +1,9 @@
 import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 import { superValidate } from 'sveltekit-superforms/server';
+import { propertySchema } from '$lib/zod';
 
 export const ssr = false;
-
-const propertySchema = z.object({
-	// See https://zod.dev/?id=primitives for schema syntax
-	id: z.number().nullable(),
-	name: z.string()
-});
 
 export const load = async ({ params }) => {
 	let id: any = Number(params.id);
