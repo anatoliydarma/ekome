@@ -12,6 +12,9 @@ const config = {
 	kit: {
 		adapter: adapter()
 	}
+	// vitePlugin: {
+	// 	exclude: ['/node_modules/']
+	// }
 };
 
 export default config;

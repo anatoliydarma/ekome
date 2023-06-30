@@ -105,7 +105,7 @@
 					{:else}
 						<Dropdown>
 							<div slot="trigger">
-								<IconUserCircle size={32} stroke={1.5} class="dark:text-stone-100" />
+								<IconUserCircle class="dark:text-stone-100 text-stone-500 h-8 w-8" />
 							</div>
 
 							<div slot="content" class="grid gap-2 bg-stone-50 rounded-md p-4">
