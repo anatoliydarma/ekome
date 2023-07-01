@@ -23,7 +23,8 @@ model AuthUser {
     auth_key     AuthKey[]
 
     orders        Order[]
-    addresses      Address[]
+    addresses     Address[]
+    favourites    Favourites[]
 
     @@map("auth_user")
 }
@@ -82,6 +83,7 @@ model Product {
 
     order_items OrderItems[]
     properties PropertiesOnProduct[]
+    favourites Favourites[]
     cart_items CartItem[]
 
     @@unique([slug, id])
@@ -98,6 +100,18 @@ model Property {
     @@index([id])
     @@map("property")
 }
+
+
+model Favourites {
+    product     Product     @relation(fields: [product_id], references: [id])
+    product_id  Int
+    user        AuthUser    @relation(fields: [user_id], references: [id])
+    user_id     String
+
+    @@id([product_id, user_id])
+    @@map("favourites")
+}
+
 
 model PropertiesOnProduct {
     product    Product     @relation(fields: [product_id], references: [id])

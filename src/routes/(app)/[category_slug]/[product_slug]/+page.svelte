@@ -5,6 +5,7 @@
 	import RelatedProducts from '$lib/components/client/RelatedProducts.svelte';
 	import { pluralize, niceGrams } from '$lib/utils';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
+	import AddToFavourite from '$lib/components/client/AddToFavourite.svelte';
 	export let data: PageData;
 	$: product = data.product;
 	$: mainImage = product.images ? product.images[0] : null;
@@ -113,10 +114,9 @@
 					</div>
 					<SelectQty minQty={product.min_qty} on:set-qty={setQty} />
 				</div>
-				<div class="flex py-8 gap-6 items-end">
+				<div class="flex py-8 gap-6 items-center">
 					<AddToCart {product} {qty} />
-
-					<button>Favourite</button>
+					<AddToFavourite product_id={product.id} />
 				</div>
 			</div>
 		</div>

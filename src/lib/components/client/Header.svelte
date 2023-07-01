@@ -110,7 +110,11 @@
 
 							<div slot="content" class="grid gap-2 bg-stone-50 rounded-md p-4">
 								<a href="/account" class="hover:underline permalink">Account</a>
+
 								<a href="/account/orders" class="hover:underline permalink">Orders</a>
+
+								<a href="/account/favourites" class="hover:underline permalink">Favourites</a>
+
 								{#if data.user.role !== 'client'}
 									<a href="/admin" class="hover:underline permalink"> Dashboard</a>
 								{/if}

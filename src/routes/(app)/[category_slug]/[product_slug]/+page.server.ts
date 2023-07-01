@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 import { db } from '$lib/server/prisma';
 import { getCostOfProduct } from '$lib/server/utils';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ params, locals }) => {
 	let slug: any = params.product_slug;
 
 	const getProduct = async () => {

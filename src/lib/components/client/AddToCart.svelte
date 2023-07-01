@@ -35,11 +35,11 @@
 		loading = true;
 		let payload = { cart: $cartStore };
 		await fetch('/api/cart', {
-			body: JSON.stringify(payload),
-			method: 'post',
+			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
-			}
+			},
+			body: JSON.stringify(payload)
 		})
 			.then((res) => res.json())
 			.then((data) => {
