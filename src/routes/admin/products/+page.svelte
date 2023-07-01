@@ -57,7 +57,9 @@
 						<td>{product.status}</td>
 						<td>{product.category.name}</td>
 						<td>
-							<a href="/admin/products/{product.id}"><IconEdit /></a>
+							<a href="/admin/products/{product.id}" class="hover w-6 h-6">
+								<IconEdit class="w-6 h-6" />
+							</a>
 						</td>
 					</tr>
 				{/each}

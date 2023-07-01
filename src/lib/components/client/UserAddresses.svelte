@@ -16,7 +16,8 @@
 		validators: addressSchema,
 		dataType: 'json',
 		taintedMessage: null,
-		validationMethod: 'submit-only'
+		validationMethod: 'submit-only',
+		warnings: { noValidationAndConstraints: false }
 	});
 
 	let loading = false;
@@ -28,11 +29,11 @@
 		const addresse =
 			addresses && addresses.length > 0 ? addresses.find((a) => a.id == selectedAddressId) : null;
 
-		$order.client_address = `${addresse.street}, ${addresse.city}, ${addresse.country}, ${addresse.zip}, ${addresse.etc}`;
+		$order.client_address = `${addresse?.street}, ${addresse?.city}, ${addresse?.country}, ${addresse?.zip}, ${addresse?.etc}`;
 	}
 	$: $order.client_country =
 		addresses && addresses.length > 0
-			? addresses.find((a) => a.id == selectedAddressId).country
+			? addresses.find((a) => a.id == selectedAddressId)?.country
 			: null;
 
 	function setEditForm(address: Address) {
@@ -107,14 +108,14 @@
 							{:else}
 								<div class="relative flex items-center gap-4">
 									<button
-										on:click={() => (selectedAddressId = address.id)}
+										on:click={() => (selectedAddressId = address?.id)}
 										class="hover:bg-stone-100 w-5 h-5 border border-stone-500 rounded-full"
 									/>
 								</div>
 							{/if}
 
 							<div class="w-full max-w-xs truncate">
-								{address.street}, {address.city}, {address.country}
+								{address?.street}, {address?.city}, {address?.country}
 							</div>
 
 							<button on:click={() => setEditForm(address)}>Edit</button>

@@ -42,7 +42,9 @@
 							{/if}
 						</td>
 						<td>
-							<a href="/admin/categories/{category.id}" class="hover w-6"><IconEdit /></a>
+							<a href="/admin/categories/{category.id}" class="hover w-6">
+								<IconEdit class="w-6 h-6" />
+							</a>
 						</td>
 					</tr>
 				{/each}

@@ -30,7 +30,9 @@
 					<tr>
 						<td>{property.name}</td>
 						<td>
-							<a href="/admin/properties/{property.id}" class="hover w-6"><IconEdit /></a>
+							<a href="/admin/properties/{property.id}" class="hover w-6">
+								<IconEdit class="w-6 h-6" />
+							</a>
 						</td>
 					</tr>
 				{/each}

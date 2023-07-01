@@ -19,7 +19,9 @@ export const GET = async (event) => {
 
 export const POST = (async (event) => {
 	const { user } = await event.locals.auth.validateUser();
-	const form = await superValidate(event, addressSchema, { id: 'addressesForm' });
+	const form = await superValidate(event, addressSchema, {
+		id: 'addressesForm'
+	});
 	form.data.id = Number.isInteger(form.data.id) ? form.data.id : null;
 
 	if (!form.valid) return actionResult('failure', { form });

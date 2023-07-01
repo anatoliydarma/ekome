@@ -40,7 +40,9 @@
 						<td>{order.client_name}</td>
 
 						<td>
-							<a href="/admin/orders/{order.id}" class="hover w-6"><IconEdit /></a>
+							<a href="/admin/orders/{order.id}" class="hover w-6 h-6">
+								<IconEdit class="w-6 h-6" />
+							</a>
 						</td>
 					</tr>
 				{/each}

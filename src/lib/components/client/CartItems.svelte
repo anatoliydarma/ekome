@@ -63,7 +63,7 @@
 						class="w-16 h-16 object-cover object-center rounded-md"
 					/>
 					<div class="space-y-1 -mt-1">
-						<div class="font-semibold">
+						<div class="font-semibold text-sm">
 							{item.name}
 						</div>
 
@@ -78,7 +78,7 @@
 					</div>
 				</div>
 				<div class="grid h-full gap-4">
-					<div class="text-sm">€ {getCost(item)}</div>
+					<div class="text-sm whitespace-nowrap">€ {getCost(item)}</div>
 
 					{#if showRemove}
 						<button

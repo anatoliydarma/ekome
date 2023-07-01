@@ -182,8 +182,8 @@
 					</div>
 
 					<div>
-						<label class="block pb-1 label">Client</label>
-						<input type="hidden" name="user_id" value={$form.user_id} />
+						<label for="user_id" class="block pb-1 label">Client</label>
+						<input type="hidden" id="user_id" name="user_id" value={$form.user_id} />
 						<Svelecte
 							clearable={true}
 							multiple={false}

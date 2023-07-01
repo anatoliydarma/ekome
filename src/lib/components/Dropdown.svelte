@@ -20,6 +20,8 @@
 	{#if open}
 		<div
 			on:click={() => (open = false)}
+			role="button"
+			tabindex="0"
 			class="absolute z-50 mt-2 w-48 rounded-md shadow-lg right-0 transition duration-300"
 		>
 			<slot name="content" />

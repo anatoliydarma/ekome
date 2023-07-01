@@ -23,6 +23,8 @@
 		<div
 			transition:fade
 			on:click={() => toggle()}
+			role="button"
+			tabindex="0"
 			class="fixed top-0 bottom-0 left-0 right-0 z-40 w-screen h-screen overflow-hidden bg-stone-900/30 cursor-pointer pointer-events-auto transition-all duration-500 backdrop-blur-sm"
 		/>
 	{/if}

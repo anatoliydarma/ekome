@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
 import { sequence } from '@sveltejs/kit/hooks';
+import { PUBLIC_DOMAIN } from '$env/static/public';
 
 export const handleAuth = async ({ event, resolve }) => {
 	event.locals.auth = auth.handleRequest(event);
@@ -18,7 +19,25 @@ export const handleMiddleware = async ({ resolve, event }) => {
 		throw redirect(303, '/login');
 	}
 
-	return await resolve(event);
+	if (event.url.pathname.startsWith('/api')) {
+		// Required for CORS to work
+		if (event.request.method === 'OPTIONS') {
+			return new Response(null, {
+				headers: {
+					'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+					'Access-Control-Allow-Origin': PUBLIC_DOMAIN,
+					'Access-Control-Allow-Headers': PUBLIC_DOMAIN
+				}
+			});
+		}
+	}
+
+	const response = await resolve(event);
+	if (event.url.pathname.startsWith('/api')) {
+		response.headers.append('Access-Control-Allow-Origin', PUBLIC_DOMAIN);
+	}
+
+	return response;
 };
 
 export const handle = sequence(handleAuth, handleMiddleware);
