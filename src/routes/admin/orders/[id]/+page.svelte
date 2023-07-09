@@ -95,7 +95,7 @@
 	<div class="max-w-screen-lg flex gap-6 items-center justify-between">
 		<div class="flex gap-6 items-center">
 			<a href="/admin/orders/" class="hover">
-				<IconChevronLeft class="dark:text-stone-100" />
+				<IconChevronLeft class="dark:text-primary-100" />
 			</a>
 			<h5>
 				{#if $form.id}

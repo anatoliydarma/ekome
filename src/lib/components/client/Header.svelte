@@ -49,7 +49,7 @@
 
 <svelte:window bind:scrollY={y} />
 <div use:action class="{headerClass} fixed w-full top-0 transition-all z-50">
-	<nav class="bg-white dark:bg-stone-900 border-b border-stone-100">
+	<nav class="bg-white dark:bg-primary-900 border-b border-primary-100">
 		<div class="max-w-screen-xl flex px-4 items-center justify-between mx-auto">
 			<a href="/" class="flex items-center">
 				<Logo class="h-6 sm:h-9" />
@@ -57,7 +57,7 @@
 			<button
 				data-collapse-toggle="navbar-default"
 				type="button"
-				class="inline-flex items-center p-2 ml-3 text-sm text-stone-500 rounded-lg md:hidden hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-stone-200 dark:text-stone-400 dark:hover:bg-stone-700 dark:focus:ring-stone-600"
+				class="inline-flex items-center p-2 ml-3 text-sm text-primary-500 rounded-lg md:hidden hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-primary-200 dark:text-primary-400 dark:hover:bg-primary-700 dark:focus:ring-primary-600"
 				aria-controls="navbar-default"
 				aria-expanded="false"
 			>
@@ -82,12 +82,12 @@
 
 			<div class="hidden w-full md:block md:w-auto" id="navbar-default">
 				<ul
-					class="flex flex-col md:items-center p-4 border border-stone-100 rounded-lg bg-stone-50 md:flex-row md:space-x-8 md:border-0 md:bg-white dark:bg-stone-800 md:dark:bg-stone-900 dark:border-stone-700"
+					class="flex flex-col md:items-center p-4 border border-primary-100 rounded-lg bg-primary-50 md:flex-row md:space-x-8 md:border-0 md:bg-white dark:bg-primary-800 md:dark:bg-primary-900 dark:border-primary-700"
 				>
 					<li>
 						<a
 							href="/"
-							class="permalink block py-2 pl-3 pr-4 text-stone-700 rounded hover:bg-stone-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-stone-400 md:dark:hover:text-white dark:hover:bg-stone-700 dark:hover:text-white md:dark:hover:bg-transparent"
+							class="permalink block py-2 pl-3 pr-4 text-primary-700 rounded hover:bg-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-primary-400 md:dark:hover:text-white dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent"
 							>Products</a
 						>
 					</li>
@@ -98,17 +98,17 @@
 						<li>
 							<a
 								href="/login"
-								class="block permalink py-2 pl-3 pr-4 text-stone-700 rounded hover:bg-stone-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-stone-400 md:dark:hover:text-white dark:hover:bg-stone-700 dark:hover:text-white md:dark:hover:bg-transparent"
+								class="block permalink py-2 pl-3 pr-4 text-primary-700 rounded hover:bg-primary-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-primary-400 md:dark:hover:text-white dark:hover:bg-primary-700 dark:hover:text-white md:dark:hover:bg-transparent"
 								>Login</a
 							>
 						</li>
 					{:else}
 						<Dropdown>
 							<div slot="trigger">
-								<IconUserCircle class="dark:text-stone-100 text-stone-500 h-8 w-8" />
+								<IconUserCircle class="dark:text-primary-100 text-primary-500 h-8 w-8" />
 							</div>
 
-							<div slot="content" class="grid gap-2 bg-stone-50 rounded-md p-4">
+							<div slot="content" class="grid gap-2 bg-primary-50 rounded-md p-4">
 								<a href="/account" class="hover:underline permalink">Account</a>
 
 								<a href="/account/orders" class="hover:underline permalink">Orders</a>

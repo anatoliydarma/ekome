@@ -84,9 +84,9 @@
 			<button on:click={() => dispatch('back')} class="hover">
 				<IconChevronLeft />
 			</button>
-			<h3 class="text-xl font-semibold text-stone-900">Payment</h3>
+			<h3 class="text-xl font-semibold text-primary-900">Payment</h3>
 		</div>
-		<div class="text-xl font-semibold text-stone-900">€ {amount}</div>
+		<div class="text-xl font-semibold text-primary-900">€ {amount}</div>
 	</div>
 
 	<div>

@@ -67,7 +67,7 @@
 				<a
 					class="{activeUrl.pathname.startsWith(link.url)
 						? ''
-						: ''} inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-stone-800 dark:hover:text-stone-200 !no-underline"
+						: ''} inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-primary-800 dark:hover:text-primary-200 !no-underline"
 					href={link.url}
 					on:click={drawerClose}
 				>

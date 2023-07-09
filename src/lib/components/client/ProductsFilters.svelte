@@ -51,12 +51,12 @@
 	getQuery();
 </script>
 
-<div class="divide-y divide-stone-200 space-y-6">
+<div class="divide-y divide-primary-200 space-y-6">
 	{#each filters as filter}
 		{#if filter.items?.length}
 			<div class="text-sm pt-5">
 				<div class="capitalize pb-3">{filter.name}</div>
-				<div class="space-y-2 text-stone-500">
+				<div class="space-y-2 text-primary-500">
 					{#each filter.items as item}
 						{#if filter.name === 'properties'}
 							<label class="flex items-center space-x-2 cursor-pointer">
@@ -92,7 +92,10 @@
 
 	{#if filtersFromQuery.pr.length || filtersFromQuery.unit.length}
 		<div class="pt-6">
-			<button class="btn variant-ringed-surface text-xs" on:click={() => clearFilters()}>
+			<button
+				class="btn variant-ringed-primary text-xs text-primary-800"
+				on:click={() => clearFilters()}
+			>
 				Clear all
 			</button>
 		</div>

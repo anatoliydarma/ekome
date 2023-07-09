@@ -21,7 +21,7 @@ button svg {
 }
 .hover:after {
 	content: '';
-	@apply -z-0 absolute inset-0 w-8 h-8 m-auto bg-stone-100 dark:bg-stone-500 rounded-full opacity-0;
+	@apply -z-0 absolute inset-0 w-8 h-8 m-auto bg-primary-100 dark:bg-primary-500 rounded-full opacity-0;
 	left: -11px;
 	right: -11px;
 	-webkit-transform: scale(0.3);
@@ -43,31 +43,31 @@ table tr td {
 .radio,
 .select,
 .textarea {
-	@apply bg-stone-50 border-stone-300 placeholder:text-surface-200 dark:placeholder:text-surface-400 disabled:cursor-not-allowed disabled:opacity-75;
+	@apply bg-primary-50 border-primary-300 placeholder:text-surface-200 dark:placeholder:text-surface-400 disabled:cursor-not-allowed disabled:opacity-75;
 }
 
 .table {
-	@apply bg-stone-50;
+	@apply bg-primary-50;
 }
 
 .table thead {
-	@apply bg-stone-100;
+	@apply bg-primary-100;
 }
 .svelte-select,
 .svelte-select-list,
 .cl-content,
 .cl-textarea {
-	@apply bg-stone-100 dark:bg-surface-700 !important;
+	@apply bg-primary-100 dark:bg-surface-700 !important;
 }
 .svelte-select input {
 	@apply focus:outline-none focus:ring-0  !important;
 }
 .multi-item,
 .cl-actionbar {
-	@apply bg-stone-200 dark:bg-surface-800 dark:border-transparent rounded-t-md !important;
+	@apply bg-primary-200 dark:bg-surface-800 dark:border-transparent rounded-t-md !important;
 }
 .list-item .item.hover {
-	@apply bg-stone-50 dark:bg-surface-600  !important;
+	@apply bg-primary-50 dark:bg-surface-600  !important;
 }
 .list-item .hover:hover:after {
 	opacity: 0;
@@ -76,10 +76,10 @@ table tr td {
 	@apply flex items-center  !important;
 }
 .cl-button {
-	@apply flex justify-center items-center text-stone-800 dark:text-surface-300  !important;
+	@apply flex justify-center items-center text-primary-800 dark:text-surface-300  !important;
 }
 .cl-button svg {
-	@apply fill-stone-800 dark:fill-surface-300;
+	@apply fill-primary-800 dark:fill-surface-300;
 }
 .cl-content {
 	@apply rounded-b-md;
@@ -89,7 +89,7 @@ table tr td {
 .sv-dropdown,
 .sv-item,
 .sv-item-content {
-	@apply bg-stone-50 border-stone-300 placeholder:text-surface-200 w-full  dark:bg-surface-800 dark:text-surface-300 !important;
+	@apply bg-primary-50 border-primary-300 placeholder:text-surface-200 w-full  dark:bg-surface-800 dark:text-surface-300 !important;
 }
 
 .sv-item,

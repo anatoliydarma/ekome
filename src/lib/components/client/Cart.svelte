@@ -32,17 +32,17 @@
 <div class="relative">
 	<button
 		on:click={() => toggle()}
-		class="p-1 group focus:outline-none hover:text-orange-500 focus:text-orange-500 relative"
+		class="p-1 group focus:outline-none hover relative"
 		aria-label="Open cart"
 	>
 		<svg
-			class="text-stone-600 w-7 h-7"
+			class="text-primary-600 w-7 h-7"
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
 		>
 			<path
-				class="text-stone-600 stroke-current group-hover:text-orange-500 focus:text-orange-500"
+				class="text-primary-600 stroke-current"
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				stroke-miterlimit="10"
@@ -50,12 +50,12 @@
 				d="M8.5 14.25c0 1.92 1.58 3.5 3.5 3.5s3.5-1.58 3.5-3.5M8.81 2 5.19 5.63m10-3.63 3.62 3.63"
 			/>
 			<path
-				class="text-stone-600 stroke-current group-hover:text-orange-500 focus:text-orange-500"
+				class="text-primary-600 stroke-current"
 				stroke-width="1.5"
 				d="M2 7.85c0-1.85.99-2 2.22-2h15.56c1.23 0 2.22.15 2.22 2 0 2.15-.99 2-2.22 2H4.22C2.99 9.85 2 10 2 7.85Z"
 			/>
 			<path
-				class="text-stone-600 stroke-current group-hover:text-orange-500 focus:text-orange-500"
+				class="text-primary-600 stroke-current"
 				stroke-linecap="round"
 				stroke-width="1.5"
 				d="m3.5 10 1.41 8.64C5.23 20.58 6 22 8.86 22h6.03c3.11 0 3.57-1.36 3.93-3.24L20.5 10"
@@ -63,9 +63,9 @@
 		</svg>
 
 		{#if $cartStore?.items.length && !loading}
-			<div class="absolute top-0 right-0">
+			<div class="absolute top-0 right-0 z-20">
 				<div
-					class="w-5 h-5 font-bold text-white bg-orange-500 bg-opacity-75 rounded-full text-xs flex items-center justify-center"
+					class="w-5 h-5 font-bold text-white bg-secondary-500 rounded-full text-xs flex items-center justify-center"
 				>
 					{$cartStore?.items.length}
 				</div>
@@ -83,17 +83,17 @@
 		<div
 			transition:fade
 			on:click={() => toggle()}
-			class="fixed top-0 bottom-0 left-0 right-0 z-40 w-screen h-screen overflow-hidden bg-stone-900/25 cursor-pointer pointer-events-auto transition-all duration-500 backdrop-blur-sm"
+			class="fixed top-0 bottom-0 left-0 right-0 z-40 w-screen h-screen overflow-hidden bg-primary-900/25 cursor-pointer pointer-events-auto transition-all duration-500 backdrop-blur-sm"
 		/>
 	{/if}
 
 	<div
 		class="{open ? 'translate-x-0' : 'translate-x-full'}
-            fixed top-0 right-0 z-50 h-screen text-stone-700 transition-all duration-700 ease-in-out transform bg-white w-full max-w-md"
+            fixed top-0 right-0 z-50 h-screen text-primary-700 transition-all duration-700 ease-in-out transform bg-white w-full max-w-md"
 	>
 		<div class="flex flex-col justify-between h-screen">
 			<div
-				class="flex items-center justify-between w-full px-6 py-3 bg-white border-b border-stone-100 md:border-transparent md:py-5"
+				class="flex items-center justify-between w-full px-6 py-3 bg-white border-b border-primary-100 md:border-transparent md:py-5"
 			>
 				<span class="">Your cart</span>
 
@@ -103,7 +103,7 @@
 						class="hover focus:outline-none focus:shadow-outline"
 						aria-label="Close the cart"
 					>
-						<IconX class="text-stone-500 stroke-current w-7 h-7" />
+						<IconX class="text-primary-500 stroke-current w-7 h-7" />
 					</button>
 				</div>
 			</div>
@@ -113,16 +113,16 @@
 					<CartItems {cart} />
 				{:else}
 					<div class="flex justify-center">
-						<div class="pt-10 text-center text-stone-600">
+						<div class="pt-10 text-center text-primary-600">
 							<div class="pt-10">Your cart is empty</div>
 						</div>
 					</div>
 				{/if}
 			</div>
 
-			<div class="w-full bg-white border-t border-stone-100 h-96 md:h-auto md:border-transparent">
+			<div class="w-full bg-white border-t border-primary-100 h-96 md:h-auto md:border-transparent">
 				{#if $cartStore?.items.length}
-					<div class="px-6 py-3 space-y-2 bg-stone-50">
+					<div class="px-6 py-3 space-y-2 bg-primary-50">
 						<div class="flex items-center justify-between gap-6 font-bold">
 							<div class="flex items-center gap-2">
 								<span>Total: </span>
@@ -142,7 +142,7 @@
 						<a
 							on:click={() => toggle()}
 							href="/checkout"
-							class="w-full permalink inline-block px-4 py-3 font-bold leading-snug text-center text-white uppercase bg-orange-400 rounded-lg hover:bg-orange-500"
+							class="w-full permalink inline-block px-4 py-3 font-bold leading-snug text-center text-white uppercase bg-secondary-400 rounded-lg hover:bg-secondary-500"
 						>
 							Checkout
 						</a>
@@ -155,7 +155,7 @@
 					<a
 						on:click={() => toggle()}
 						href="/login"
-						class="w-full permalink inline-block px-4 py-3 font-bold leading-snug text-center text-white uppercase bg-orange-400 rounded-lg hover:bg-orange-500"
+						class="w-full permalink inline-block px-4 py-3 font-bold leading-snug text-center text-white uppercase bg-secondary-400 rounded-lg hover:bg-secondary-500"
 					>
 						Login
 					</a>

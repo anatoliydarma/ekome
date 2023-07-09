@@ -23,11 +23,11 @@
 <main class="px-4 max-w-screen-xl mx-auto">
 	<ol class="breadcrumb text-xs">
 		<li class="crumb">
-			<a class="text-stone-500 unstyled hover:underline" href="/"> Home </a>
+			<a class="text-primary-500 unstyled hover:underline" href="/"> Home </a>
 		</li>
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 		<li>
-			<a class="text-stone-500 unstyled hover:underline" href="/{product.category.slug}">
+			<a class="text-primary-500 unstyled hover:underline" href="/{product.category.slug}">
 				{product.category?.name}
 			</a>
 		</li>
@@ -41,7 +41,7 @@
 				<img
 					src={mainImage ? `/assets/${mainImage}` : '/img/noimage.svg'}
 					alt={product.name}
-					class="h-auto w-full bg-stone-50"
+					class="h-auto w-full bg-primary-50"
 				/>
 			</div>
 
@@ -52,7 +52,7 @@
 							<img
 								src={image ? `/assets/${image}` : ''}
 								alt={product.name}
-								class="focus:outline-none object-cover w-12 rounded-md h-12 bg-stone-100 border-2 border-transparent hover:border-lime-500"
+								class="focus:outline-none object-cover w-12 rounded-md h-12 bg-primary-100 border-2 border-transparent hover:border-lime-500"
 							/>
 						</button>
 					{/each}
@@ -61,16 +61,18 @@
 
 			<div class="pt-8">
 				{#if product.desc}
-					<div class="prose prose-stone">
+					<div class="prose prose-primary">
 						{@html product.desc}
 					</div>
 				{/if}
 			</div>
 		</div>
 
-		<div class="w-full md:w-5/12 text-stone-600">
+		<div class="w-full md:w-5/12 text-primary-600">
 			<div class="sticky top-20 z-10">
-				<h2 class="mb-2 leading-tight tracking-tight font-bold text-stone-800 text-2xl md:text-3xl">
+				<h2
+					class="mb-2 leading-tight tracking-tight font-bold text-primary-800 text-2xl md:text-3xl"
+				>
 					{product.name}
 				</h2>
 				{#if product.sku}
@@ -81,12 +83,12 @@
 
 				<div class="flex items-center space-x-4 py-4">
 					<div>
-						<div class="rounded-lg bg-stone-100 flex py-2 px-3">
-							<span class="text-stone-800 pr-1 pt-1">€</span>
-							<span class="font-bold text-stone-800 text-3xl">{product.price}</span>
+						<div class="rounded-lg bg-primary-100 flex py-2 px-3">
+							<span class="text-primary-800 pr-1 pt-1">€</span>
+							<span class="font-bold text-primary-800 text-3xl">{product.price}</span>
 						</div>
 					</div>
-					<div class="text-stone-500 text-sm">
+					<div class="text-primary-500 text-sm">
 						<p>
 							Price / {niceGrams(product.weight)}
 							{pluralize(product.weight, product.unit)}
@@ -98,14 +100,14 @@
 				<div class="space-y-2">
 					<div class="w-40">
 						{#if product.weight}
-							<div class="text-sm pb-1 text-stone-500 flex justify-between">
+							<div class="text-sm pb-1 text-primary-500 flex justify-between">
 								Weight: <span
 									>{niceGrams(product.weight)}
 									{pluralize(product.weight, product.unit)}</span
 								>
 							</div>
 						{/if}
-						<div class="text-sm pb-1 text-stone-500 flex justify-between">
+						<div class="text-sm pb-1 text-primary-500 flex justify-between">
 							Min order: <span>
 								{niceGrams(product.min_qty)}
 								{pluralize(product.min_qty, product.unit)}

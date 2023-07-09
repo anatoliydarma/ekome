@@ -19,7 +19,7 @@
 <main class="space-y-6">
 	<div class="flex gap-6 items-center pl-1">
 		<a href="/admin/products/" class="hover">
-			<IconChevronLeft class="dark:text-stone-100" />
+			<IconChevronLeft class="dark:text-primary-100" />
 		</a>
 		{#if $form.id}
 			<h3>Edit {$form.name}</h3>

@@ -16,13 +16,17 @@
 			<!-- Card -->
 			<div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-surface-800">
 				<div
-					class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500"
+					class="p-3 mr-4 text-secondary-500 bg-secondary-100 rounded-full dark:text-secondary-100 dark:bg-secondary-500"
 				>
 					<IconShoppingCart />
 				</div>
 				<div>
-					<p class="mb-2 text-sm font-medium text-stone-600 dark:text-stone-400">Total orders</p>
-					<p class="text-lg font-semibold text-stone-700 dark:text-stone-200">{data.ordersCount}</p>
+					<p class="mb-2 text-sm font-medium text-primary-600 dark:text-primary-400">
+						Total orders
+					</p>
+					<p class="text-lg font-semibold text-primary-700 dark:text-primary-200">
+						{data.ordersCount}
+					</p>
 				</div>
 			</div>
 		</div>
@@ -31,9 +35,11 @@
 		<h3>Charts</h3>
 		<div class="grid gap-6 mb-8 md:grid-cols-2">
 			<div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-surface-800">
-				<h4 class="mb-4 font-semibold text-stone-800 dark:text-stone-300">Revenue</h4>
+				<h4 class="mb-4 font-semibold text-primary-800 dark:text-primary-300">Revenue</h4>
 				<canvas id="pie" />
-				<div class="flex justify-center mt-4 space-x-3 text-sm text-stone-600 dark:text-stone-400">
+				<div
+					class="flex justify-center mt-4 space-x-3 text-sm text-primary-600 dark:text-primary-400"
+				>
 					<!-- Chart legend -->
 					<div class="flex items-center">
 						<span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full" />
@@ -50,9 +56,11 @@
 				</div>
 			</div>
 			<div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-surface-800">
-				<h4 class="mb-4 font-semibold text-stone-800 dark:text-stone-300">Traffic</h4>
+				<h4 class="mb-4 font-semibold text-primary-800 dark:text-primary-300">Traffic</h4>
 				<canvas id="line" />
-				<div class="flex justify-center mt-4 space-x-3 text-sm text-stone-600 dark:text-stone-400">
+				<div
+					class="flex justify-center mt-4 space-x-3 text-sm text-primary-600 dark:text-primary-400"
+				>
 					<!-- Chart legend -->
 					<div class="flex items-center">
 						<span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full" />

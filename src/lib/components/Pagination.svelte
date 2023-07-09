@@ -22,13 +22,13 @@
 				{#if pagination.previousPage}
 					<a
 						href={url + `?page=${pagination.previousPage}`}
-						class="block py-2 px-3 text-sm font-medium border border-stone-300 text-stone-500 bg-white hover:bg-stone-100 hover:text-stone-700 dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white rounded-l-lg unstyled"
+						class="block py-2 px-3 text-sm font-medium border border-primary-300 text-primary-500 bg-white hover:bg-primary-100 hover:text-primary-700 dark:bg-primary-800 dark:border-primary-700 dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white rounded-l-lg unstyled"
 						>Previous</a
 					>
 				{:else}
 					<button
 						disabled
-						class="block py-2 px-3 text-sm font-medium border border-stone-300 text-stone-500 bg-white disabled:cursor-not-allowed dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 rounded-l-lg unstyled"
+						class="block py-2 px-3 text-sm font-medium border border-primary-300 text-primary-500 bg-white disabled:cursor-not-allowed dark:bg-primary-800 dark:border-primary-700 dark:text-primary-400 rounded-l-lg unstyled"
 						>Previous</button
 					>
 				{/if}
@@ -39,8 +39,8 @@
 					<button
 						on:click={() => gotoPage(index + 1)}
 						class="{pagination.currentPage == `${index + 1}`
-							? 'dark:bg-stone-700 bg-stone-100'
-							: 'dark:bg-stone-800 bg-white'} block py-2 px-3 text-sm font-medium border border-stone-300 text-stone-500 hover:bg-stone-100 hover:text-stone-700 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white unstyled"
+							? 'dark:bg-primary-700 bg-primary-100'
+							: 'dark:bg-primary-800 bg-white'} block py-2 px-3 text-sm font-medium border border-primary-300 text-primary-500 hover:bg-primary-100 hover:text-primary-700 dark:border-primary-700 dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white unstyled"
 					>
 						{index + 1}
 					</button>
@@ -51,14 +51,14 @@
 				{#if pagination.nextPage}
 					<a
 						href={url + `?page=${pagination.nextPage}`}
-						class="block py-2 px-3 text-sm font-medium border border-stone-300 text-stone-500 bg-white hover:bg-stone-100 hover:text-stone-700 dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 dark:hover:bg-stone-700 dark:hover:text-white rounded-r-lg unstyled"
+						class="block py-2 px-3 text-sm font-medium border border-primary-300 text-primary-500 bg-white hover:bg-primary-100 hover:text-primary-700 dark:bg-primary-800 dark:border-primary-700 dark:text-primary-400 dark:hover:bg-primary-700 dark:hover:text-white rounded-r-lg unstyled"
 					>
 						Next
 					</a>
 				{:else}
 					<button
 						disabled
-						class="block py-2 px-3 text-sm font-medium border border-stone-300 text-stone-500 bg-white disabled:cursor-not-allowed dark:bg-stone-800 dark:border-stone-700 dark:text-stone-400 rounded-r-lg unstyled"
+						class="block py-2 px-3 text-sm font-medium border border-primary-300 text-primary-500 bg-white disabled:cursor-not-allowed dark:bg-primary-800 dark:border-primary-700 dark:text-primary-400 rounded-r-lg unstyled"
 						>Next</button
 					>
 				{/if}

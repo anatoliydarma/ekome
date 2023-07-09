@@ -13,9 +13,11 @@
 <main class="h-full overflow-y-auto">
 	<div class="container px-6 flex gap-6 items-center">
 		<a href="/admin/categories/" class="hover">
-			<IconChevronLeft class="dark:text-stone-100" />
+			<IconChevronLeft class="dark:text-primary-100" />
 		</a>
-		<h2 class="my-6 text-2xl font-semibold text-stone-700 dark:text-stone-200">Add new property</h2>
+		<h2 class="my-6 text-2xl font-semibold text-primary-700 dark:text-primary-200">
+			Add new property
+		</h2>
 	</div>
 
 	<div class="px-6 flex gap-6">

@@ -112,7 +112,7 @@
 		<button
 			id="states-button"
 			data-dropdown-toggle="dropdown-states"
-			class="relative flex-shrink-0 overflow-hidden z-10 whitespace-nowrap inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-stone-500 bg-stone-100 border border-stone-300 rounded-l-md hover:bg-stone-200 focus:outline-none dark:bg-stone-700 dark:hover:bg-stone-600 dark:text-white dark:border-stone-600"
+			class="relative flex-shrink-0 overflow-hidden z-10 whitespace-nowrap inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-primary-500 bg-primary-100 border border-primary-300 rounded-l-md hover:bg-primary-200 focus:outline-none dark:bg-primary-700 dark:hover:bg-primary-600 dark:text-white dark:border-primary-600"
 			type="button"
 			role="combobox"
 			aria-controls="dropdown-countries"
@@ -125,7 +125,7 @@
 					<span class="mr-3">
 						{getFlagEmoji(selectedCountry.toLowerCase())}
 					</span>
-					<span class="text-stone-600 dark:text-stone-400">+{selectedCountryDialCode} </span>
+					<span class="text-primary-600 dark:text-primary-400">+{selectedCountryDialCode} </span>
 				</div>
 			{:else}
 				Please select
@@ -147,7 +147,7 @@
 		{#if isOpen}
 			<div
 				id="dropdown-countries"
-				class="absolute z-10 max-w-fit bg-white rounded divide-y divide-stone-100 shadow dark:bg-stone-700 overflow-hidden translate-y-11"
+				class="absolute z-10 max-w-fit bg-white rounded divide-y divide-primary-100 shadow dark:bg-primary-700 overflow-hidden translate-y-11"
 				data-popper-reference-hidden=""
 				data-popper-escaped=""
 				data-popper-placement="bottom"
@@ -156,14 +156,14 @@
 				tabindex="-1"
 			>
 				<div
-					class="text-sm text-stone-700 dark:text-stone-200 max-h-48 overflow-y-auto"
+					class="text-sm text-primary-700 dark:text-primary-200 max-h-48 overflow-y-auto"
 					aria-labelledby="countries-button"
 					role="listbox"
 				>
 					<input
 						aria-autocomplete="list"
 						type="text"
-						class="px-4 py-2 text-stone-900 focus:outline-none w-full sticky top-0"
+						class="px-4 py-2 text-primary-900 focus:outline-none w-full sticky top-0"
 						bind:value={searchText}
 						placeholder={searchPlaceholder}
 					/>
@@ -173,11 +173,11 @@
 							<button
 								value={country.iso2}
 								type="button"
-								class="inline-flex py-2 px-4 w-full text-sm hover:bg-stone-100 dark:hover:bg-stone-600
-                             active:bg-stone-800 dark:active:bg-stone-800 overflow-hidden
+								class="inline-flex py-2 px-4 w-full text-sm hover:bg-primary-100 dark:hover:bg-primary-600
+                             active:bg-primary-800 dark:active:bg-primary-800 overflow-hidden
                             {isActive
-									? 'bg-stone-600 dark:text-white'
-									: 'dark:hover:text-white dark:text-stone-400'}"
+									? 'bg-primary-600 dark:text-white'
+									: 'dark:hover:text-white dark:text-primary-400'}"
 								on:click={(e) => {
 									handleSelect(country.iso2, e);
 								}}
@@ -185,7 +185,7 @@
 								<div class="inline-flex items-center text-left">
 									<span class="mr-3">{getFlagEmoji(country.iso2.toLowerCase())}</span>
 									<span class="mr-2">{country.name}</span>
-									<span class="text-stone-500">+{country.dialCode}</span>
+									<span class="text-primary-500">+{country.dialCode}</span>
 								</div>
 							</button>
 						</div>
@@ -204,6 +204,6 @@
 		{id}
 		{options}
 		required={true}
-		class="text-sm rounded-r-md block w-full p-2.5 focus:outline-none border border-stone-300 border-l-stone-100 dark:border-l-stone-700 dark:border-stone-600 bg-stone-50 dark:bg-stone-700 placeholder-surface-300 dark:text-white text-stone-900 focus:ring-0"
+		class="text-sm rounded-r-md block w-full p-2.5 focus:outline-none border border-primary-300 border-l-primary-100 dark:border-l-primary-700 dark:border-primary-600 bg-primary-50 dark:bg-primary-700 placeholder-surface-300 dark:text-white text-primary-900 focus:ring-0"
 	/>
 </div>

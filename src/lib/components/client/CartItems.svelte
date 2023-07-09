@@ -84,7 +84,7 @@
 						<button
 							on:click={() => remove(item.product_id)}
 							aria-label="remove"
-							class="text-xs text-stone-500 hover:text-red-500"
+							class="text-xs text-primary-500 hover:text-red-500"
 						>
 							Remove
 						</button>

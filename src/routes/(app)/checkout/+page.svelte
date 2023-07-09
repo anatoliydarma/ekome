@@ -75,7 +75,7 @@
 	<div class="bg-white">
 		<div class="fixed top-0 left-0 hidden h-full w-1/2 bg-white lg:block z-10" aria-hidden="true" />
 		<div
-			class="fixed top-0 right-0 hidden h-full w-1/2 bg-stone-50/50 lg:block z-10"
+			class="fixed top-0 right-0 hidden h-full w-1/2 bg-primary-50/50 lg:block z-10"
 			aria-hidden="true"
 		/>
 
@@ -86,7 +86,7 @@
 				{#if !showPayment}
 					<div>
 						<div class="flex gap-6 justify-between items-center w-full">
-							<h3 class="text-xl font-semibold text-stone-900 pb-3">Contact information</h3>
+							<h3 class="text-xl font-semibold text-primary-900 pb-3">Contact information</h3>
 						</div>
 						<div class="space-y-4 max-w-xs">
 							<label class="label">
@@ -122,9 +122,9 @@
 						</div>
 					</div>
 
-					<div class="border-t border-stone-200">
+					<div class="border-t border-primary-200">
 						<div class="pt-6">
-							<h3 class="text-xl font-semibold text-stone-900">Shipping information</h3>
+							<h3 class="text-xl font-semibold text-primary-900">Shipping information</h3>
 							<UserAddresses formData={data} />
 						</div>
 					</div>
@@ -143,47 +143,47 @@
 				{/if}
 			</div>
 			<div>
-				<h3 class="text-xl font-semibold text-stone-900 pb-4">Order summary</h3>
+				<h3 class="text-xl font-semibold text-primary-900 pb-4">Order summary</h3>
 
 				<CartItems cart={data.cart} showQty={!showPayment} showRemove={false} />
 
 				<div class="pt-6">
 					<div class="space-y-4">
-						<div class="flex items-center justify-between border-t border-stone-200 pt-6">
+						<div class="flex items-center justify-between border-t border-primary-200 pt-6">
 							<div class="text-sm">Weight (Net)</div>
-							<div class="text-sm font-medium text-stone-900">
+							<div class="text-sm font-medium text-primary-900">
 								{niceGrams($order.weight)} kg
 							</div>
 						</div>
 
 						<div class="flex items-center justify-between">
 							<div class="text-sm">Subtotal</div>
-							<div class="text-sm font-medium text-stone-900">€ {$order.amount}</div>
+							<div class="text-sm font-medium text-primary-900">€ {$order.amount}</div>
 						</div>
 						<div class="flex items-center justify-between">
 							<div class="text-sm">Shipping</div>
-							<div class="text-sm font-medium text-stone-900">
+							<div class="text-sm font-medium text-primary-900">
 								{#if $order.client_country}
 									€ {$order.shipping_cost}
 								{:else}
-									<span class="text-stone-400">Select shipping address</span>
+									<span class="text-primary-400">Select shipping address</span>
 								{/if}
 							</div>
 						</div>
 						<div class="flex items-center justify-between">
 							<div class="text-sm">VAT ({vatProcent || ''}%)</div>
-							<div class="text-sm font-medium text-stone-900">
+							<div class="text-sm font-medium text-primary-900">
 								{#if $order.client_country}
 									€ {$order.tax_cost}
 								{:else}
-									<span class="text-stone-400">Select shipping address</span>
+									<span class="text-primary-400">Select shipping address</span>
 								{/if}
 							</div>
 						</div>
 
-						<div class="flex items-center justify-between border-t border-stone-200 pt-6">
+						<div class="flex items-center justify-between border-t border-primary-200 pt-6">
 							<div class="text-base font-medium">Total</div>
-							<div class="text-base font-medium text-stone-900">
+							<div class="text-base font-medium text-primary-900">
 								€ {(
 									Number($order.amount) +
 									Number($order.shipping_cost) +

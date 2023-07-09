@@ -1,10 +1,24 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import { DELIVERY, EURO, ORDER_STATUSES, STRIPE, VAT } from '$lib/consts';
+import { readable } from 'svelte/store';
+import { navigating } from '$app/stores';
 
 export function handleLoginRedirect(event: RequestEvent) {
 	const redirectTo = event.url.pathname + event.url.search;
 	return `/login?redirectTo=${redirectTo}`;
 }
+
+export const previousPage = readable(null, (set) => {
+	const unsubscribe = navigating.subscribe(($navigating) => {
+		// Check if `$navigating` has a value
+		// because it's set to `null` after navigation is done
+		if ($navigating) {
+			set($navigating.from?.url.pathname);
+		}
+	});
+
+	return () => unsubscribe();
+});
 
 export async function createOrder(order: Order) {
 	return await fetch(`/api/orders/`, {

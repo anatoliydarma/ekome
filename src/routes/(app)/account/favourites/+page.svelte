@@ -34,7 +34,7 @@
 			{/each}
 
 			{#if loading}
-				<div class="w-full h-64 bg-stone-100 animate-pulse rounded-lg" />
+				<div class="w-full h-64 bg-primary-100 animate-pulse rounded-lg" />
 			{/if}
 		</div>
 	</div>

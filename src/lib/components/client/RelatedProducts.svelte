@@ -9,10 +9,10 @@
 <div class="pt-24">
 	{#await streamed}
 		<div class="grid gap-8 grid-cols-4">
-			<div class="w-full h-60 bg-stone-100 animate-pulse rounded-lg" />
-			<div class="w-full h-60 bg-stone-100 animate-pulse rounded-lg" />
-			<div class="w-full h-60 bg-stone-100 animate-pulse rounded-lg" />
-			<div class="w-full h-60 bg-stone-100 animate-pulse rounded-lg" />
+			<div class="w-full h-60 bg-primary-100 animate-pulse rounded-lg" />
+			<div class="w-full h-60 bg-primary-100 animate-pulse rounded-lg" />
+			<div class="w-full h-60 bg-primary-100 animate-pulse rounded-lg" />
+			<div class="w-full h-60 bg-primary-100 animate-pulse rounded-lg" />
 		</div>
 	{:then value}
 		{#if value.relatedProducts.length}

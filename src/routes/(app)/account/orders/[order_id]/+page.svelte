@@ -21,7 +21,7 @@
 
 	<ul
 		role="list"
-		class="mt-6 divide-y divide-stone-200 border-t border-stone-200 text-sm font-medium text-stone-500"
+		class="mt-6 divide-y divide-primary-200 border-t border-primary-200 text-sm font-medium text-primary-500"
 	>
 		{#each data.order.items as item}
 			<li class="flex space-x-6 py-6">
@@ -30,34 +30,36 @@
 						? `/assets/${item.product.images[0]}`
 						: '/img/noimage.svg'}
 					alt={item.product.name}
-					class="h-24 w-24 flex-none rounded-md bg-stone-100 object-cover object-center"
+					class="h-24 w-24 flex-none rounded-md bg-primary-100 object-cover object-center"
 				/>
 				<div class="flex-auto space-y-1">
-					<h4 class="text-stone-900">{item.product.name}</h4>
+					<h4 class="text-primary-900">{item.product.name}</h4>
 					<p>Qty: {item.qty}</p>
 				</div>
-				<p class="flex-none font-medium text-stone-900">€ {item.price}</p>
+				<p class="flex-none font-medium text-primary-900">€ {item.price}</p>
 			</li>
 		{/each}
 	</ul>
 
-	<dl class="space-y-6 border-t border-stone-200 pt-6 text-sm font-medium text-stone-500">
+	<dl class="space-y-6 border-t border-primary-200 pt-6 text-sm font-medium text-primary-500">
 		<div class="flex justify-between">
 			<dt>Subtotal</dt>
-			<dd class="text-stone-900">€ {data.order.amount}</dd>
+			<dd class="text-primary-900">€ {data.order.amount}</dd>
 		</div>
 
 		<div class="flex justify-between">
 			<dt>Shipping</dt>
-			<dd class="text-stone-900">€ {data.order.shipping_cost}</dd>
+			<dd class="text-primary-900">€ {data.order.shipping_cost}</dd>
 		</div>
 
 		<div class="flex justify-between">
 			<dt>Taxes</dt>
-			<dd class="text-stone-900">€ {data.order.tax_cost}</dd>
+			<dd class="text-primary-900">€ {data.order.tax_cost}</dd>
 		</div>
 
-		<div class="flex items-center justify-between border-t border-stone-200 pt-6 text-stone-900">
+		<div
+			class="flex items-center justify-between border-t border-primary-200 pt-6 text-primary-900"
+		>
 			<dt class="text-base">Total</dt>
 			<dd class="text-base">
 				€
@@ -66,9 +68,9 @@
 		</div>
 	</dl>
 
-	<dl class="pt-8 grid grid-cols-2 gap-x-4 text-sm text-stone-600">
+	<dl class="pt-8 grid grid-cols-2 gap-x-4 text-sm text-primary-600">
 		<div>
-			<dt class="font-medium text-stone-900">Shipping Address</dt>
+			<dt class="font-medium text-primary-900">Shipping Address</dt>
 			<dd class="mt-2">
 				<address class="not-italic">
 					<div>{data.order.client_name}</div>

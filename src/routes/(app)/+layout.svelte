@@ -2,6 +2,7 @@
 	import Header from '$lib/components/client/Header.svelte';
 	import Footer from '$lib/components/client/Footer.svelte';
 	import { fade } from 'svelte/transition';
+	import { page } from '$app/stores';
 	export let data;
 </script>
 

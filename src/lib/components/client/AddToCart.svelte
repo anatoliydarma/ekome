@@ -58,8 +58,9 @@
 	on:click={addToCart}
 	disabled={loading}
 	type="button"
-	class="btn variant-filled-primary flex gap-2"
-	>Add to Cart
+	class="btn bg-secondary-600 text-white flex gap-2"
+>
+	Add to Cart
 	{#if loading}
 		<IconLoader2 class="text-primary-100 animate-spin" />
 	{/if}

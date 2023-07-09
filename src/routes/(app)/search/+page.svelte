@@ -83,7 +83,7 @@
 <main class="px-4 max-w-screen-xl mx-auto space-y-6 min-h-screen">
 	<ol class="breadcrumb text-xs">
 		<li class="crumb">
-			<a class="text-stone-500 unstyled hover:underline" href="/">Home</a>
+			<a class="text-primary-500 unstyled hover:underline" href="/">Home</a>
 		</li>
 		<li class="crumb-separator" aria-hidden>&rsaquo;</li>
 		<li>Search</li>
@@ -112,11 +112,11 @@
 			{/each}
 
 			{#if loading}
-				<div class="w-full h-64 bg-stone-100 animate-pulse rounded-lg" />
+				<div class="w-full h-64 bg-primary-100 animate-pulse rounded-lg" />
 			{/if}
 
 			{#if end && !loading}
-				<div class="w-full h-64 bg-stone-100 rounded-lg flex justify-center items-center">
+				<div class="w-full h-64 bg-primary-100 rounded-lg flex justify-center items-center">
 					<button on:click={() => scrollToTop()} class="btn variant-filled">Go to top</button>
 				</div>
 			{/if}

@@ -19,8 +19,8 @@
 
 <div class="flex justify-center flex-col space-y-6 lg:w-80">
 	<div class="text-center">
-		<h2 class="text-2xl font-bold tracking-tight text-stone-900 unstyled">Register</h2>
-		<p class="mt-2 text-sm text-stone-600">
+		<h2 class="text-2xl font-bold tracking-tight text-primary-900 unstyled">Register</h2>
+		<p class="mt-2 text-sm text-primary-600">
 			Already have an account?
 			<a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">Login</a>
 		</p>

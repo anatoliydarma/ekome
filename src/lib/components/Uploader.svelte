@@ -89,7 +89,7 @@
 				{#if loading}
 					<IconLoader2 class="text-lime-500 animate-spin" />
 				{:else}
-					<IconCloudUpload class="text-stone-500 dark:text-stone-400" />
+					<IconCloudUpload class="text-primary-500 dark:text-primary-400" />
 				{/if}
 			</div>
 		</svelte:fragment>
@@ -113,7 +113,7 @@
 				<button
 					type="button"
 					on:click={() => handleRemoveFile(item, index)}
-					class="absolute -top-3 -right-3 text-stone-600 rounded-full bg-white p-1 hover:text-red-600 invisible group-hover:visible"
+					class="absolute -top-3 -right-3 text-primary-600 rounded-full bg-white p-1 hover:text-red-600 invisible group-hover:visible"
 				>
 					<IconX class="w-5 h-5" />
 				</button>

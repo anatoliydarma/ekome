@@ -85,7 +85,7 @@
 				<div class="">
 					<div class="font-medium mb-4">Billing Details</div>
 					<div class="mb-1 text-sm">{order?.client_name} | {order?.client_email}</div>
-					<address class="text-stone-500 italic text-sm">
+					<address class="text-primary-500 italic text-sm">
 						{order?.address.street}, {order?.address.city}, {order?.address.country}, {order
 							?.address.zip}<br />{order?.address.etc}<br />
 

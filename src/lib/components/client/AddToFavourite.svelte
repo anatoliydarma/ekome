@@ -42,12 +42,17 @@
 	});
 </script>
 
-<button on:click={() => toggle()} class="group" title="Favourite">
+<button
+	on:click={() => toggle()}
+	class="group variant-ringed-primary btn flex gap-2"
+	title="Favourite"
+>
 	{#if loading}
-		<IconLoader2 class="text-lime-500 animate-spin w-6 h-6" />
+		<IconLoader2 class="text-primary-500 animate-spin w-6 h-6" />
 	{:else if isFavourite}
-		<IconHeartFilled class="w-6 h-6 text-red-500 group-hover:text-red-600" />
+		<IconHeartFilled class="w-6 h-6 text-primary-500 group-hover:text-primary-600" />
 	{:else}
-		<IconHeart class="w-6 h-6 group-hover:text-red-500" />
+		<IconHeart class="w-6 h-6 group-hover:text-primary-500" />
 	{/if}
+	Favourite
 </button>

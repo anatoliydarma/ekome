@@ -8,7 +8,7 @@
 	href="/{categorySlug}/{product.slug}"
 	title={product.name}
 >
-	<div class="w-full h-64 overflow-hidden rounded-lg">
+	<div class="w-full h-64 overflow-hidden">
 		<img
 			src={product.images && product.images.length > 0
 				? `/assets/${product.images[0]}`

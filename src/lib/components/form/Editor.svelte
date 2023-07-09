@@ -72,11 +72,11 @@
 	}
 </script>
 
-<div class="bg-stone-100 dark:bg-surface-700 text-stone-800 dark:text-surface-200 rounded-md">
+<div class="bg-primary-100 dark:bg-surface-700 text-primary-800 dark:text-surface-200 rounded-md">
 	<input type="hidden" {name} value={content} />
 
 	<div
-		class="flex items-center bg-stone-200 dark:bg-surface-800 text-stone-800 dark:text-surface-200 rounded-t-md p-1 gap-1"
+		class="flex items-center bg-primary-200 dark:bg-surface-800 text-primary-800 dark:text-surface-200 rounded-t-md p-1 gap-1"
 	>
 		{#if editor}
 			<button

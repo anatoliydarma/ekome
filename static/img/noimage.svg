@@ -2,11 +2,11 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #f7f7f7;
+        fill: #f6fbfa;
       }
 
       .cls-2 {
-        fill: #2b303e;
+        fill: #778985;
         fill-rule: evenodd;
         opacity: 0.07;
       }

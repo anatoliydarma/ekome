@@ -98,7 +98,7 @@
 					<div
 						class="border bg-white rounded-lg p-4 {selectedAddressId === address.id
 							? 'border-secondary-500'
-							: 'border-stone-300'}"
+							: 'border-primary-300'}"
 					>
 						<div class="flex items-center gap-4 justify-between">
 							{#if selectedAddressId === address.id}
@@ -109,7 +109,7 @@
 								<div class="relative flex items-center gap-4">
 									<button
 										on:click={() => (selectedAddressId = address?.id)}
-										class="hover:bg-stone-100 w-5 h-5 border border-stone-500 rounded-full"
+										class="hover:bg-primary-100 w-5 h-5 border border-primary-500 rounded-full"
 									/>
 								</div>
 							{/if}
@@ -265,14 +265,16 @@
 
 		<div>
 			<div
-				class="{addNew ? 'border-stone-300 bg-white' : 'border-transparent'} border rounded-lg py-2"
+				class="{addNew
+					? 'border-primary-300 bg-white'
+					: 'border-transparent'} border rounded-lg py-2"
 			>
 				<div class="flex">
 					<button
 						on:click={() => ((addNew = !addNew), ($form = { ...selected }))}
 						class="{addNew
 							? 'border-transparent'
-							: 'border-stone-300 bg-white '} border rounded-lg px-4 py-2 hover:text-secondary-600"
+							: 'border-primary-300 bg-white '} border rounded-lg px-4 py-2 hover:text-secondary-600"
 						>Add new address</button
 					>
 				</div>
