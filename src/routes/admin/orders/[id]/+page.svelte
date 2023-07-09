@@ -7,7 +7,7 @@
 	import Helper from '$lib/components/Helper.svelte';
 	import SelectQty from '$lib/components/SelectQty.svelte';
 	import { toastStore, SlideToggle } from '@skeletonlabs/skeleton';
-	import { getCostOfDeliveryAndVat } from '$lib/utils';
+	import { getCostOfDeliveryAndVat } from '$lib/client/delivery';
 	import { BOX_WEIGHT } from '$lib/consts';
 
 	export let data;

@@ -3,7 +3,7 @@
 	import SelectQty from '$lib/components/SelectQty.svelte';
 	import AddToCart from '$lib/components/client/AddToCart.svelte';
 	import RelatedProducts from '$lib/components/client/RelatedProducts.svelte';
-	import { pluralize, niceGrams } from '$lib/utils';
+	import { pluralize, niceGrams } from '$lib/client/utils';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	import AddToFavourite from '$lib/components/client/AddToFavourite.svelte';
 	export let data: PageData;

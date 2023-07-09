@@ -1,6 +1,6 @@
 <script lang="ts">
 	import dayjs from 'dayjs';
-	import { getOrderStatus } from '$lib/utils';
+	import { getOrderStatus } from '$lib/client/utils.js';
 	import Drawer from '$lib/components/Drawer.svelte';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	export let data;

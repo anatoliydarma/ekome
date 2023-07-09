@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clickOutside } from '$lib/utils';
+	import { clickOutside } from '$lib/client/utils';
 	import IconChevronDown from '~icons/tabler/chevron-down';
 
 	export let open: boolean = false;

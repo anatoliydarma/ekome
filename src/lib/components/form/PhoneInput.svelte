@@ -11,7 +11,7 @@
 	} from 'svelte-tel-input/types';
 
 	import { createEventDispatcher } from 'svelte';
-	import { getFlagEmoji } from '$lib/utils';
+	import { getFlagEmoji } from '$lib/client/utils';
 
 	let clickOutside = true;
 	let closeOnClick = true;

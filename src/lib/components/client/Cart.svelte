@@ -6,7 +6,7 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import type { CartItem, Cart } from './$types';
 	import { browser } from '$app/environment';
-	import { niceGrams } from '$lib/utils';
+	import { niceGrams } from '$lib/client/utils';
 	export let cart: Cart;
 	export let user: any;
 

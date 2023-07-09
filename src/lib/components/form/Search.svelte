@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto, invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { previousPage } from '$lib/utils';
+	import { previousPage } from '$lib/client/utils';
 	import IconSearch from '~icons/tabler/search';
 
 	let search: string = $page.url.searchParams.get('search') || '';

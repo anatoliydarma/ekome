@@ -3,7 +3,7 @@
 	import IconMinus from '~icons/tabler/minus';
 
 	import { createEventDispatcher } from 'svelte';
-	import { niceGrams } from '$lib/utils';
+	import { niceGrams } from '$lib/client/utils';
 	const dispatch = createEventDispatcher();
 	export let isInCart: boolean = false;
 	export let minQty: number = 1;

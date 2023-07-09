@@ -8,7 +8,7 @@
 	import { Elements, PaymentElement } from '$lib/components/payment/';
 	import Loading from '$lib/components/Loading.svelte';
 	import { cartStore } from '$lib/stores/shop';
-	import { createOrder, saveCart } from '$lib/utils';
+	import { createOrder, saveCart } from '$lib/client/utils';
 	import { order } from '$lib/stores/shop';
 
 	const dispatch = createEventDispatcher();

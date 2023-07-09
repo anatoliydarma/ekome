@@ -7,7 +7,8 @@
 	import { order } from '$lib/stores/shop';
 	import { onMount } from 'svelte';
 	import Payment from '$lib/components/client/Payment.svelte';
-	import { getCostOfDeliveryAndVat, niceGrams } from '$lib/utils';
+	import { niceGrams } from '$lib/client/utils';
+	import { getCostOfDeliveryAndVat } from '$lib/client/delivery';
 	import { BOX_WEIGHT } from '$lib/consts';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	export let data;

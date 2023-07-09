@@ -382,7 +382,12 @@
 									</div>
 								</div>
 							</div>
-							<div class="pt-4 flex justify-end">
+							<div class="pt-4 flex justify-between">
+								<button
+									on:click={() => (addNew = false)}
+									class="border border-primary-300 rounded-lg px-4 py-2 hover:border-primary-600"
+									>Close</button
+								>
 								<button type="submit" class="btn variant-filled-primary">
 									<Loading loading={$delayed} />
 									Save
