@@ -6,6 +6,7 @@
 	export let qty: number;
 	let loading = false;
 
+	// TODO test it
 	async function addToCart() {
 		if (
 			$cartStore &&
