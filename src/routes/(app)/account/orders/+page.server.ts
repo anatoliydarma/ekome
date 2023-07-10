@@ -1,7 +1,7 @@
 import { db } from '$lib/server/prisma';
 
 export const load = async ({ locals }) => {
-	const { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 	const getUserOrders = async () => {
 		const userOrders = user?.id
 			? await db.authUser.findUnique({

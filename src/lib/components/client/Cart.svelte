@@ -21,12 +21,12 @@
 		}
 	}
 
-	$: totalAmount = $cartStore.items.reduce(
+	$: totalAmount = $cartStore?.items?.reduce(
 		(total: number, item: CartItem) => total + (item.price * item.qty) / item.weight,
 		0
 	);
 
-	$: totalQty = $cartStore.items.reduce((total: number, item: CartItem) => total + item.qty, 0);
+	$: totalQty = $cartStore?.items?.reduce((total: number, item: CartItem) => total + item.qty, 0);
 </script>
 
 <div class="relative">
@@ -62,12 +62,12 @@
 			/>
 		</svg>
 
-		{#if $cartStore?.items.length && !loading}
+		{#if $cartStore?.items?.length && !loading}
 			<div class="absolute top-0 right-0 z-20">
 				<div
 					class="w-5 h-5 font-bold text-white bg-secondary-500 rounded-full text-xs flex items-center justify-center"
 				>
-					{$cartStore?.items.length}
+					{$cartStore?.items?.length}
 				</div>
 			</div>
 		{/if}
@@ -109,7 +109,7 @@
 			</div>
 
 			<div class="relative z-50 h-full px-4 py-4 overflow-y-auto bg-white md:px-6 scrollbar">
-				{#if $cartStore?.items.length}
+				{#if $cartStore?.items?.length}
 					<CartItems {cart} />
 				{:else}
 					<div class="flex justify-center">
@@ -121,7 +121,7 @@
 			</div>
 
 			<div class="w-full bg-white border-t border-primary-100 h-96 md:h-auto md:border-transparent">
-				{#if $cartStore?.items.length}
+				{#if $cartStore?.items?.length}
 					<div class="px-6 py-3 space-y-2 bg-primary-50">
 						<div class="flex items-center justify-between gap-6 font-bold">
 							<div class="flex items-center gap-2">
@@ -137,7 +137,7 @@
 						<div class="text-xs">Shipping and taxes calculated at checkout.</div>
 					</div>
 				{/if}
-				{#if user && $cartStore?.items.length}
+				{#if user && $cartStore?.items?.length}
 					<div class="px-6 py-2 md:py-6">
 						<a
 							on:click={() => toggle()}

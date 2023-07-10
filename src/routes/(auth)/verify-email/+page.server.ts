@@ -6,63 +6,41 @@ import { PUBLIC_DOMAIN } from '$env/static/public';
 
 export const load = async (event) => {
 	const tokenParams = event.url.searchParams.get('token');
-	const { user } = await event.locals.auth.validateUser();
+	const user = event.locals.user;
 
-	if (user && user.email_verified) {
-		return { user };
+	if (user && user.verified) {
+		return { user: user };
 	}
 
 	if (tokenParams) {
 		try {
-			const token = await emailVerificationToken.validate(tokenParams);
-			await auth.updateUserAttributes(token.userId, {
-				email_verified: true
-			});
-			await auth.invalidateAllUserSessions(token.userId);
-			const session = await auth.createSession(token.userId);
-			event.locals.auth.setSession(session);
-
-			const { user } = await event.locals.auth.validateUser();
-			return { user };
+			await event.locals.pb.collection('users').confirmVerification(tokenParams);
+			await event.locals.pb.collection('users').authRefresh();
+			return { user: user };
 		} catch (e) {
-			if (e instanceof LuciaTokenError && e.message === 'EXPIRED_TOKEN') {
-				throw error(404, {
-					message: 'expired token/link'
-				});
-			}
-			if (e instanceof LuciaTokenError && e.message === 'INVALID_TOKEN') {
-				throw error(404, {
-					message: 'invalid link'
-				});
-			}
+			console.error(e);
+
+			// TODO
+			// if (e instanceof LuciaTokenError && e.message === 'EXPIRED_TOKEN') {
+			// 	throw error(404, {
+			// 		message: 'expired token/link'
+			// 	});
+			// }
+			// if (e instanceof LuciaTokenError && e.message === 'INVALID_TOKEN') {
+			// 	throw error(404, {
+			// 		message: 'invalid link'
+			// 	});
+			// }
 		}
 	}
-
-	return { user };
 };
 
 export const actions = {
 	default: async (event) => {
-		const { user } = await event.locals.auth.validateUser();
+		const user = event.locals.user;
 
 		if (user) {
-			const token = await emailVerificationToken.issue(user.id);
-			const url = `${PUBLIC_DOMAIN}/verify-email?token=${token.toString()}`;
-
-			let email: string = '';
-			await event
-				.fetch(`/api/users/${user.id}`, {
-					method: 'get',
-					headers: {
-						'Content-Type': 'application/json'
-					}
-				})
-				.then((res) => res.json())
-				.then((data) => {
-					email = data.email;
-				});
-
-			await sendEmail(email, 'Verify email', 'verify-email', url);
+			await event.locals.pb.collection('users').requestVerification(user.email);
 
 			return { success: true };
 		}

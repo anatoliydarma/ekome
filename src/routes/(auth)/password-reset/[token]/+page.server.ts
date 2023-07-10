@@ -13,9 +13,9 @@ export const actions = {
 		try {
 			const token = await passwordResetToken.validate(params.token ?? '');
 			let user = await auth.getUser(token.userId);
-			if (!user.email_verified) {
+			if (!user.verified) {
 				user = await auth.updateUserAttributes(user.id, {
-					email_verified: true
+					verified: true
 				});
 			}
 			await auth.invalidateAllUserSessions(user.id);

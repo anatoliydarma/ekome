@@ -2,8 +2,8 @@ import { handleLoginRedirect } from '$lib/client/utils';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async (event) => {
-	let { user } = await event.locals.auth.validateUser();
-	if (!user && !user?.email_verified) {
+	const user = {}; //await locals.auth.validateUser();
+	if (!user && !user?.verified) {
 		throw redirect(302, handleLoginRedirect(event));
 	}
 

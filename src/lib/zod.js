@@ -18,7 +18,8 @@ export const userSchema = z.object({
 	role: z.string().default('client'),
 	active: z.boolean(),
 	password: z.string().optional(),
-	email_verified: z.boolean()
+	verified: z.boolean(),
+	passwordConfirm: z.string()
 });
 
 export const categorySchema = z.object({

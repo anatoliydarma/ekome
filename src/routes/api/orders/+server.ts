@@ -6,7 +6,7 @@ import { sendDataToSlack, sendEmail } from '$lib/server/utils';
 // CREATE
 export const POST = async ({ request, locals }) => {
 	const { order } = await request.json();
-	const { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 
 	//TODO  number: string?;
 	order.number = nanoid();

@@ -4,6 +4,9 @@ import type { PrismaClient } from '@prisma/client';
 declare global {
 	namespace App {
 		interface Locals {
+			pb: import('pocketbase').default;
+			user: import('pocketbase').default['authStore']['model'];
+
 			/// <reference types="@sveltejs/kit" />
 			auth: import('lucia-auth').AuthRequest;
 			formData: Record<string, any>;
@@ -25,7 +28,7 @@ declare global {
 			role: string;
 			email: string;
 			name: string?;
-			email_verified: boolean;
+			verified: boolean;
 			phone: string?;
 			active: boolean?;
 		};

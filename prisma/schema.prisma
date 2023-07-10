@@ -64,7 +64,7 @@ model Product {
     sku     String?
     upc     Int?
     min_qty     Int        @default(1)
-    status  String         @default("DRAFT")
+    status  String         @default("draft")
     images  Json?
     popularity Int         @default(0)
     unit    String?

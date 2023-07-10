@@ -1,5 +1,9 @@
-export const load = async ({ locals }) => {
-	const { user } = await locals.auth.validateUser();
+import { serializeNonPOJOs } from '$lib/server/utils';
 
-	return { user };
+export const load = ({ locals }) => {
+	if (locals.user) {
+		return {
+			user: serializeNonPOJOs(locals.user)
+		};
+	}
 };

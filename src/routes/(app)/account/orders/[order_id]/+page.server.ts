@@ -2,7 +2,7 @@ import { db } from '$lib/server/prisma';
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals, params }) => {
-	const { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 	const getUserOrder = async () => {
 		const userOrder = user?.id
 			? await db.order.findUnique({

@@ -5,22 +5,23 @@ import { getCostOfProduct } from '$lib/server/utils';
 
 export const GET = async (event) => {
 	const cartId = event.cookies.get('cart_id');
-	const { user } = await event.locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 
-	let cart = cartId
-		? await db.cart.findUnique({
-				where: {
-					id: cartId
-				},
-				include: {
-					items: {
-						include: {
-							product: true
-						}
-					}
-				}
-		  })
-		: null;
+	let cart = {};
+	//cartId
+	// ? await db.cart.findUnique({
+	// 		where: {
+	// 			id: cartId
+	// 		},
+	// 		include: {
+	// 			items: {
+	// 				include: {
+	// 					product: true
+	// 				}
+	// 			}
+	// 		}
+	//   })
+	// : null;
 
 	if (user && cart && cart.user_id != user.id) {
 		let oldCart = cart;
@@ -76,26 +77,26 @@ export const GET = async (event) => {
 	event.cookies.set('cart_id', cart.id, { path: '/' });
 
 	// Add user id
-	if (user && cart.user_id == null) {
-		await db.cart.update({
-			where: {
-				id: cart.id
-			},
-			data: {
-				user_id: user.id
-			},
-			include: {
-				items: {
-					include: {
-						product: true
-					}
-				}
-			}
-		});
-	}
+	// if (user && cart.user_id == null) {
+	// 	await db.cart.update({
+	// 		where: {
+	// 			id: cart.id
+	// 		},
+	// 		data: {
+	// 			user_id: user.id
+	// 		},
+	// 		include: {
+	// 			items: {
+	// 				include: {
+	// 					product: true
+	// 				}
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	// Map items
-	if (cart.items.length) {
+	if (cart?.items?.length) {
 		cart.items = cart.items.map((item) => ({
 			product_id: item.product.id,
 			name: item.product.name,
@@ -113,21 +114,21 @@ export const GET = async (event) => {
 export const POST = async ({ request }) => {
 	const { cart } = await request.json();
 	if (cart) {
-		await db.cart.update({
-			where: {
-				id: cart.id
-			},
-			data: {
-				items: {
-					deleteMany: {},
-					create: cart.items.map((item: { product_id: any; qty: any }) => ({
-						product_id: item.product_id,
-						qty: item.qty,
-						weight: item.weight
-					}))
-				}
-			}
-		});
+		// await db.cart.update({
+		// 	where: {
+		// 		id: cart.id
+		// 	},
+		// 	data: {
+		// 		items: {
+		// 			deleteMany: {},
+		// 			create: cart.items.map((item: { product_id: any; qty: any }) => ({
+		// 				product_id: item.product_id,
+		// 				qty: item.qty,
+		// 				weight: item.weight
+		// 			}))
+		// 		}
+		// 	}
+		// });
 		return json(202);
 	}
 

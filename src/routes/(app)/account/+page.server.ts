@@ -11,7 +11,7 @@ const accountSchema = userSchema.pick({
 });
 
 export const load = async ({ locals }) => {
-	const { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 
 	const editUser = user?.id
 		? await db.authUser.findUnique({

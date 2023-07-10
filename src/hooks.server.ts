@@ -2,20 +2,34 @@ import { redirect } from '@sveltejs/kit';
 import { auth } from '$lib/server/lucia';
 import { sequence } from '@sveltejs/kit/hooks';
 import { PUBLIC_DOMAIN } from '$env/static/public';
+import { pb } from '$lib/server/pocketbase';
 
-export const handleAuth = async ({ event, resolve }) => {
-	event.locals.auth = auth.handleRequest(event);
-	return await resolve(event);
-};
+// export const handleAuth = async ({ event, resolve }) => {
+// 	event.locals.auth = auth.handleRequest(event);
+// 	return await resolve(event);
+// };
 
 export const handleMiddleware = async ({ resolve, event }) => {
-	const { user } = await event.locals.auth.validateUser();
+	pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');
+	if (pb.authStore.isValid) {
+		try {
+			await pb.collection('users').authRefresh();
+		} catch (_) {
+			pb.authStore.clear();
+		}
+	}
 
-	if (event.url.pathname.startsWith('/account') && !user) {
+	event.locals.pb = pb;
+	event.locals.user = structuredClone(pb.authStore.model);
+
+	const response = await resolve(event);
+	response.headers.set('set-cookie', pb.authStore.exportToCookie({ httpOnly: false }));
+
+	if (event.url.pathname.startsWith('/account') && !event.locals.user) {
 		throw redirect(303, '/login');
 	}
 
-	if (event.url.pathname.startsWith('/admin') && user?.role !== 'admin') {
+	if (event.url.pathname.startsWith('/admin') && event.locals.user?.role !== 'admin') {
 		throw redirect(303, '/login');
 	}
 
@@ -32,7 +46,6 @@ export const handleMiddleware = async ({ resolve, event }) => {
 		}
 	}
 
-	const response = await resolve(event);
 	if (event.url.pathname.startsWith('/api')) {
 		response.headers.append('Access-Control-Allow-Origin', PUBLIC_DOMAIN);
 	}
@@ -40,7 +53,7 @@ export const handleMiddleware = async ({ resolve, event }) => {
 	return response;
 };
 
-export const handle = sequence(handleAuth, handleMiddleware);
+export const handle = sequence(handleMiddleware);
 
 export const handleError = ({ error, event }) => {
 	console.error(error);

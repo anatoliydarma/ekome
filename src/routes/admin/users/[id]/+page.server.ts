@@ -69,7 +69,7 @@ export const actions = {
 							name: form.data.name,
 							email: form.data.email,
 							role: 'client',
-							email_verified: true,
+							verified: true,
 							phone: form.data.phone,
 							active: form.data.active
 						}

@@ -12,28 +12,29 @@ export const load: PageServerLoad = async ({ params, url }) => {
 		: [];
 	const filterByUnits = url.searchParams.getAll('unit') || [];
 	const getCategory = async () => {
-		const category = slug
-			? await db.category.findUnique({
-					where: {
-						slug: slug,
-						status: true
-					},
-					select: {
-						id: true,
-						name: true,
-						slug: true,
-						desc: true,
-						products: {
-							where: {
-								status: 'active'
-							},
-							include: {
-								properties: { select: { property: true } }
-							}
-						}
-					}
-			  })
-			: null;
+		const category = [];
+		// slug
+		// ? await db.category.findUnique({
+		// 		where: {
+		// 			slug: slug,
+		// 			status: true
+		// 		},
+		// 		select: {
+		// 			id: true,
+		// 			name: true,
+		// 			slug: true,
+		// 			desc: true,
+		// 			products: {
+		// 				where: {
+		// 					status: 'active'
+		// 				},
+		// 				include: {
+		// 					properties: { select: { property: true } }
+		// 				}
+		// 			}
+		// 		}
+		//   })
+		// : null;
 
 		if (slug && !category) throw error(404, 'Category not found.');
 

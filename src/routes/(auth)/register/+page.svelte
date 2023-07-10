@@ -13,7 +13,8 @@
 	const { form, errors, enhance, delayed, constraints } = superForm(data.form, {
 		taintedMessage: null,
 		validators: signUpSchema,
-		delayMs: 0
+		delayMs: 0,
+		dataType: 'json'
 	});
 </script>
 

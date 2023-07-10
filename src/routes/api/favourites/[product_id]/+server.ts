@@ -2,7 +2,7 @@ import { db } from '$lib/server/prisma';
 import { json } from '@sveltejs/kit';
 
 export const GET = async ({ params, locals }) => {
-	let { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 	if (!user) {
 		return json({ isFavourite: false });
 	}
@@ -19,7 +19,7 @@ export const GET = async ({ params, locals }) => {
 
 export const POST = async ({ params, request, locals }) => {
 	const { isFavourite } = await request.json();
-	let { user } = await locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 
 	if (isFavourite) {
 		await db.favourites.delete({

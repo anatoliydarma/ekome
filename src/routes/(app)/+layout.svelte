@@ -8,7 +8,7 @@
 
 <Header bind:data />
 
-{#if data.user && !data.user?.email_verified}
+{#if data.user && !data.user?.verified}
 	<div
 		class="fixed bottom-4 left-4 mx-auto max-w-lg rounded-xl bg-yellow-50 p-4 text-sm shadow-md z-50"
 	>

@@ -12,7 +12,7 @@ export const GET = async ({ params }) => {
 			name: true,
 			phone: true,
 			role: true,
-			email_verified: true
+			verified: true
 		}
 	});
 	return json(user);

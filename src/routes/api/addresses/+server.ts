@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 import { addressSchema } from '$lib/zod';
 
 export const GET = async (event) => {
-	const { user } = await event.locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 
 	const addresses = await db.address.findMany({
 		where: {
@@ -18,7 +18,7 @@ export const GET = async (event) => {
 };
 
 export const POST = (async (event) => {
-	const { user } = await event.locals.auth.validateUser();
+	const user = {}; //await locals.auth.validateUser();
 	const form = await superValidate(event, addressSchema, {
 		id: 'addressesForm'
 	});

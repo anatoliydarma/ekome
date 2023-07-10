@@ -149,3 +149,7 @@ export function getName(name: string, name2: string | undefined) {
 	let extra_name = name2 != undefined ? ` ${name2?.trim()}` : '';
 	return `${name?.trim()}${extra_name}`;
 }
+
+export const serializeNonPOJOs = (obj: object) => {
+	return JSON.parse(JSON.stringify(obj));
+};

@@ -8,7 +8,7 @@
 
 <div class="flex justify-center flex-col space-y-6 lg:w-80">
 	<div class="flex flex-col items-center justify-center">
-		{#if data.user && data.user.email_verified}
+		{#if data.user && data.user.verified}
 			<div class="pt-2 text-lime-600">
 				Your email was verified. You can start enjoying shoping on
 

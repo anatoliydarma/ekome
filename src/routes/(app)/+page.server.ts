@@ -3,17 +3,17 @@ import { db } from '$lib/server/prisma';
 
 export const load = async () => {
 	const getCategories = async () => {
-		const categories = await db.category.findMany({
-			where: {
-				status: true
-			}
-		});
+		// const categories = await db.category.findMany({
+		// 	where: {
+		// 		status: true
+		// 	}
+		// });
 
-		if (!categories) {
-			throw error(404, 'Categories not found');
-		}
+		// if (!categories) {
+		// 	throw error(404, 'Categories not found');
+		// }
 
-		return categories;
+		return []; //categories;
 	};
 
 	return { categories: getCategories() };
