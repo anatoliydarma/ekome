@@ -1,21 +1,15 @@
-import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { PRODUCT_STATUSES, PRODUCT_UNITS, BRANDS, COUNTRIES, GST } from '$lib/consts';
 import { superValidate } from 'sveltekit-superforms/server';
 import { productSchema } from '$lib/zod';
 
-export const load = async ({ params }) => {
+export const load = async ({ params, locals }) => {
 	let id: any = Number(params.id);
 	id = Number.isInteger(id) ? id : null;
 
 	let product = id
-		? await db.product.findUnique({
-				where: {
-					id: id
-				},
-				include: {
-					properties: { select: { property: true } }
-				}
+		? await locals.pb.collection('products').getOne(id, {
+				expand: 'properties'
 		  })
 		: null;
 
@@ -33,14 +27,13 @@ export const load = async ({ params }) => {
 
 	const form = await superValidate(JSON.parse(JSON.stringify(product)), productSchema);
 
-	const categories = await db.category.findMany({
-		select: {
-			id: true,
-			name: true
-		}
+	const categories = await locals.pb.collection('categories').getFullList({
+		sort: '-created'
 	});
 
-	const properties = await db.property.findMany();
+	const properties = await locals.pb.collection('properties').getFullList({
+		sort: '-created'
+	});
 
 	return {
 		form,
@@ -70,65 +63,39 @@ export const actions = {
 
 		try {
 			if (!form.data.id) {
-				await db.product.create({
-					data: {
-						name: form.data.name,
-						status: form.data.status,
-						desc: form.data.desc,
-						sku: form.data.sku,
-						upc: form.data.upc,
-						unit: form.data.unit,
-						price: form.data.price,
-						gst: form.data.gst,
-						min_qty: form.data.min_qty,
-						category_id: form.data.category_id,
-						images: images.length > 0 ? images.toString().split(',') : [],
-						properties: {
-							create: properties.map((property) => ({
-								property: { connect: { id: property.id } }
-							}))
-						},
-						brand: form.data.brand,
-						country: form.data.country
-					}
+				await event.locals.pb.collection('products').create({
+					name: form.data.name,
+					status: form.data.status,
+					desc: form.data.desc,
+					sku: form.data.sku,
+					upc: form.data.upc,
+					unit: form.data.unit,
+					price: form.data.price,
+					gst: form.data.gst,
+					min_qty: form.data.min_qty,
+					category_id: form.data.category_id,
+					images: images.length > 0 ? images.toString().split(',') : [],
+					brand: form.data.brand,
+					country: form.data.country,
+					properties: properties.map((property) => property.id)
 				});
 			} else {
-				await db.product.update({
-					where: {
-						id: form.data.id
-					},
-					data: {
-						name: form.data.name,
-						status: form.data.status,
-						desc: form.data.desc,
-						sku: form.data.sku,
-						upc: form.data.upc,
-						unit: form.data.unit,
-						price: form.data.price,
-						gst: form.data.gst,
-						min_qty: form.data.min_qty,
-						category_id: form.data.category_id,
-						images: images.length > 0 ? images.toString().split(',') : [],
-						brand: form.data.brand,
-						country: form.data.country
-					}
+				await event.locals.pb.collection('products').update(form.data.id, {
+					name: form.data.name,
+					status: form.data.status,
+					desc: form.data.desc,
+					sku: form.data.sku,
+					upc: form.data.upc,
+					unit: form.data.unit,
+					price: form.data.price,
+					gst: form.data.gst,
+					min_qty: form.data.min_qty,
+					category_id: form.data.category_id,
+					images: images.length > 0 ? images.toString().split(',') : [],
+					brand: form.data.brand,
+					country: form.data.country,
+					properties: properties.map((property) => property.id)
 				});
-
-				if (properties) {
-					await db.product.update({
-						where: {
-							id: form.data.id
-						},
-						data: {
-							properties: {
-								deleteMany: {},
-								create: properties.map((property) => ({
-									property: { connect: { id: property.id } }
-								}))
-							}
-						}
-					});
-				}
 			}
 		} catch (e) {
 			console.error(e);
@@ -137,15 +104,11 @@ export const actions = {
 		throw redirect(303, '/admin/products');
 	},
 
-	delete: async ({ request }) => {
+	delete: async ({ request, locals }) => {
 		const values = await request.formData();
-		const id = !isNaN(Number(values.get('id'))) ? Number(values.get('id')) : undefined;
+		const id = values.get('id');
 		try {
-			const deleteUser = await db.product.delete({
-				where: {
-					id: id
-				}
-			});
+			const deleteUser = id ? await locals.pb.collection('products').delete(id) : null;
 		} catch (e) {
 			console.error(e);
 

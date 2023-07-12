@@ -1,10 +1,8 @@
-import { db } from '$lib/server/prisma';
-
-export const load = async ({ url }) => {
+export const load = async ({ locals }) => {
 	const getOrders = async () => {
-		const ordersCount = await db.order.count();
+		const ordersCount = await locals.pb.collection('orders').getFullList();
 
-		return ordersCount;
+		return ordersCount.length;
 	};
 
 	return { ordersCount: getOrders() };

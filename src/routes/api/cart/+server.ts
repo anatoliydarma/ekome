@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
+
 import { nanoid } from 'nanoid';
 import { getCostOfProduct } from '$lib/server/utils';
 
@@ -25,18 +25,19 @@ export const GET = async (event) => {
 
 	if (user && cart && cart.user_id != user.id) {
 		let oldCart = cart;
-		cart = await db.cart.findFirst({
-			where: {
-				user_id: user.id
-			},
-			include: {
-				items: {
-					include: {
-						product: true
-					}
-				}
-			}
-		});
+		cart = {};
+		// 	await db.cart.findFirst({
+		// 	where: {
+		// 		user_id: user.id
+		// 	},
+		// 	include: {
+		// 		items: {
+		// 			include: {
+		// 				product: true
+		// 			}
+		// 		}
+		// 	}
+		// });
 
 		// if (oldCart) {
 		// 	oldCart = await prisma.cart.findUnique({
@@ -60,18 +61,18 @@ export const GET = async (event) => {
 	}
 
 	if (!cart) {
-		cart = await db.cart.create({
-			data: {
-				id: nanoid()
-			},
-			include: {
-				items: {
-					include: {
-						product: true
-					}
-				}
-			}
-		});
+		// cart = await db.cart.create({
+		// 	data: {
+		// 		id: nanoid()
+		// 	},
+		// 	include: {
+		// 		items: {
+		// 			include: {
+		// 				product: true
+		// 			}
+		// 		}
+		// 	}
+		// });
 	}
 
 	event.cookies.set('cart_id', cart.id, { path: '/' });

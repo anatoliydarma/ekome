@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SlideToggle } from '@skeletonlabs/skeleton';
-	import Uploader from '$lib/components/Uploader.svelte';
+	import UploaderPB from '$lib/components/UploaderPB.svelte';
 	import IconChevronLeft from '~icons/tabler/chevron-left';
 	import { superForm } from 'sveltekit-superforms/client';
 	import Helper from '$lib/components/Helper.svelte';
@@ -25,6 +25,7 @@
 	<div class="px-6 max-w-screen-md">
 		<form method="POST" action="?/save" use:enhance>
 			<input type="hidden" name="id" value={$form.id} />
+			<input type="hidden" name="slug" value={$form.slug} />
 
 			<div class="space-y-4">
 				<div class="flex gap-6 flex-wrap max-w-2xl">
@@ -88,7 +89,12 @@
 					<div class="w-full">
 						<label for="image" class="block pb-1 label">Image</label>
 
-						<Uploader bind:uploaded={$form.image} filename={$form.slug} name={'image'} />
+						<UploaderPB
+							bind:uploaded={$form.image}
+							name={'image'}
+							collection={'categories'}
+							recordId={$form.id}
+						/>
 
 						{#if $errors.image}
 							<Helper>{$errors.image}</Helper>

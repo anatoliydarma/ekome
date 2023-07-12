@@ -1,29 +1,13 @@
 import { error } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
 
-export const load = async ({ url }) => {
+export const load = async ({ url, locals }) => {
 	const getProducts = async () => {
 		const page = Number(url.searchParams.get('page') || 1);
 		const limit = 15;
 
-		const products = await db.product
-			.paginate({
-				include: {
-					category: {
-						select: {
-							name: true
-						}
-					}
-				},
-				orderBy: {
-					id: 'desc'
-				}
-			})
-			.withPages({
-				limit: limit,
-				page: page,
-				includePageCount: true
-			});
+		const products = await locals.pb.collection('products').getList(page, limit, {
+			sort: '-created,id'
+		});
 
 		if (!products) {
 			throw error(404, 'Products not found');

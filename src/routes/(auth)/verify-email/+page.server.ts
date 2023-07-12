@@ -1,8 +1,4 @@
-import { auth } from '$lib/server/lucia';
-import { error } from '@sveltejs/kit';
-import { emailVerificationToken, sendEmail } from '$lib/server/utils';
-import { LuciaTokenError } from '@lucia-auth/tokens';
-import { PUBLIC_DOMAIN } from '$env/static/public';
+import { sendEmail } from '$lib/server/utils';
 
 export const load = async (event) => {
 	const tokenParams = event.url.searchParams.get('token');

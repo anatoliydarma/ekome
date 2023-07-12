@@ -1,6 +1,5 @@
 import type { PageServerLoad } from './$types';
 import { error } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
 import { PRODUCT_UNITS, SORTS } from '$lib/consts';
 
 export const load: PageServerLoad = async ({ params, url }) => {

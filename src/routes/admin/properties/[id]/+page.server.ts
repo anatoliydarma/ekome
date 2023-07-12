@@ -1,4 +1,3 @@
-import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 import { propertySchema } from '$lib/zod';
@@ -8,13 +7,14 @@ export const ssr = false;
 export const load = async ({ params }) => {
 	let id: any = Number(params.id);
 	id = Number.isInteger(id) ? id : undefined;
-	const property = id
-		? await db.property.findUnique({
-				where: {
-					id: id
-				}
-		  })
-		: null;
+	const property = {};
+	// id
+	// ? await db.property.findUnique({
+	// 		where: {
+	// 			id: id
+	// 		}
+	//   })
+	// : null;
 
 	if (id && !property) throw error(404, 'Property not found.');
 
@@ -33,20 +33,20 @@ export const actions = {
 
 		try {
 			if (!form.data.id) {
-				await db.property.create({
-					data: {
-						name: form.data.name
-					}
-				});
+				// await db.property.create({
+				// 	data: {
+				// 		name: form.data.name
+				// 	}
+				// });
 			} else {
-				await db.property.update({
-					where: {
-						id: form.data.id
-					},
-					data: {
-						name: form.data.name
-					}
-				});
+				// await db.property.update({
+				// 	where: {
+				// 		id: form.data.id
+				// 	},
+				// 	data: {
+				// 		name: form.data.name
+				// 	}
+				// });
 			}
 		} catch (e) {
 			return fail(400, { e });
@@ -59,11 +59,11 @@ export const actions = {
 		const values = await request.formData();
 		const id = !isNaN(Number(values.get('id'))) ? Number(values.get('id')) : undefined;
 		try {
-			const deleteUser = await db.property.delete({
-				where: {
-					id: id
-				}
-			});
+			// const deleteUser = await db.property.delete({
+			// 	where: {
+			// 		id: id
+			// 	}
+			// });
 		} catch (e) {
 			console.error(e);
 

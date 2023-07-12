@@ -1,5 +1,3 @@
-import { auth } from '$lib/server/lucia';
-import { idToken } from '@lucia-auth/tokens';
 import { render } from 'svelte-email';
 import VerifyEmail from '$lib/emails/VerifyEmail.svelte';
 import NewOrder from '$lib/emails/NewOrder.svelte';
@@ -9,15 +7,64 @@ import { PUBLIC_APP_NAME, PUBLIC_EMAIL } from '$env/static/public';
 import { EURO, GST, MARGIN } from '$lib/consts';
 import { IncomingWebhook } from '@slack/webhook';
 import { env } from '$env/dynamic/private';
+import { pb } from './pocketbase';
+import slugify from 'slugify';
 const url = env.PRIVATE_SLACK_WEBHOOK_URL_STORE;
 
-export const otpToken = idToken(auth, 'otp', {
-	expiresIn: 60 * 60 // 1 hour
-});
+export async function save(collection: string, record: any, create = false) {
+	// convert obj to FormData in case one of the fields is instanceof FileList
+	const data = object2formdata(record);
+	if (record.id && !create) {
+		// "create" flag overrides update
+		return await pb.collection(collection).update(record.id, data);
+	} else {
+		return await pb.collection(collection).create(data);
+	}
+}
+// convert obj to FormData in case one of the fields is instanceof FileList
+function object2formdata(obj: {}) {
+	// check if any field's value is an instanceof FileList
+	if (!Object.values(obj).some((val) => val instanceof FileList || val instanceof File)) {
+		// if not, just return the original object
+		return obj;
+	}
+	// otherwise, build FormData from obj
+	const fd = new FormData();
+	for (const [key, val] of Object.entries(obj)) {
+		if (val instanceof FileList) {
+			for (const file of val) {
+				fd.append(key, file);
+			}
+		} else if (val instanceof File) {
+			// handle File before "object" so that it doesn't get serialized as JSON
+			fd.append(key, val);
+		} else if (typeof val === 'object') {
+			fd.append(key, JSON.stringify(val));
+		} else {
+			fd.append(key, val as any);
+		}
+	}
+	return fd;
+}
 
-export const emailVerificationToken = idToken(auth, 'email-verification', {
-	expiresIn: 60 * 60 // 1 hour
-});
+export async function getUniqueSlug(slug: string, collection: string, count = 0) {
+	slug = slugify(slug, {
+		lower: true,
+		strict: true,
+		remove: /[*+~.()'"!:@]/g
+	});
+	const records = await pb.collection(collection).getList(1, 1, {
+		filter: `slug="${slug}"`
+	});
+
+	if (records.items.length != 0) {
+		count += 1;
+		slug = `${slug}-${count}`;
+		getUniqueSlug(slug, collection, count);
+	} else {
+		return slug;
+	}
+}
 
 export async function sendEmail(email: string, subject: string, template: string, prop: any) {
 	const transporter = nodemailer.createTransport({

@@ -1,18 +1,11 @@
-import { db } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/server';
 import { categorySchema } from '$lib/zod';
+import { getUniqueSlug } from '$lib/server/utils';
 
-export const load = async ({ params }) => {
-	let id: any = Number(params.id);
-	id = Number.isInteger(id) ? id : undefined;
-	const category = id
-		? await db.category.findUnique({
-				where: {
-					id: id
-				}
-		  })
-		: null;
+export const load = async ({ params, locals }) => {
+	let id: string | undefined = params.id ? params.id : undefined;
+	const category = id ? await locals.pb.collection('categories').getOne(id) : null;
 
 	if (id && !category) throw error(404, 'Category not found.');
 
@@ -23,37 +16,19 @@ export const load = async ({ params }) => {
 export const actions = {
 	save: async (event) => {
 		const form = await superValidate(event, categorySchema);
-
 		if (!form.valid) {
 			return fail(400, { form });
 		}
 
-		let image = form.data.image && form.data.image[0].length > 0 ? form.data.image : [];
-
+		// let image = form.data.image && form.data.image[0].length > 0 ? form.data.image : null;
+		// form.data.image = image;
 		try {
 			if (!form.data.id) {
-				await db.category.create({
-					data: {
-						name: form.data.name,
-						status: form.data.status,
-						desc: form.data.desc,
-						sort: form.data.sort,
-						image: image
-					}
-				});
+				form.data.slug = await getUniqueSlug(form.data.name, 'categories');
+
+				await event.locals.pb.collection('categories').create(form.data);
 			} else {
-				await db.category.update({
-					where: {
-						id: form.data.id
-					},
-					data: {
-						name: form.data.name,
-						status: form.data.status,
-						desc: form.data.desc,
-						sort: form.data.sort,
-						image: image
-					}
-				});
+				await event.locals.pb.collection('categories').update(form.data.id, form.data);
 			}
 		} catch (e) {
 			return fail(400, { e });
@@ -62,15 +37,13 @@ export const actions = {
 		throw redirect(303, '/admin/categories');
 	},
 
-	delete: async ({ request }) => {
+	delete: async ({ request, locals }) => {
 		const values = await request.formData();
-		const id = !isNaN(Number(values.get('id'))) ? Number(values.get('id')) : undefined;
+		const id = values.get('id') ? values.get('id') : undefined;
 		try {
-			const deleteUser = await db.category.delete({
-				where: {
-					id: id
-				}
-			});
+			if (id) {
+				await locals.pb.collection('categories').delete(id);
+			}
 		} catch (e) {
 			console.error(e);
 

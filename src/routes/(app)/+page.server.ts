@@ -1,5 +1,4 @@
 import { error } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
 
 export const load = async () => {
 	const getCategories = async () => {

@@ -49,7 +49,7 @@
 			</thead>
 
 			<tbody>
-				{#each data.products[0] as product}
+				{#each data.products?.items as product}
 					<tr>
 						<td>{product.name}</td>
 						<td>{product.sku}</td>
@@ -66,6 +66,6 @@
 			</tbody>
 		</table>
 
-		<Pagination pagination={data.products[1]} {url} />
+		<Pagination pagination={data.products} {url} />
 	</div>
 </main>

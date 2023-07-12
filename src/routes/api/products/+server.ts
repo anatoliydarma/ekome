@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { db, getPopularProducts, getProducts } from '$lib/server/prisma';
+// import { db, getPopularProducts, getProducts } from '$lib/server/prisma';
 import { getCostOfProduct, getOrderByProduct } from '$lib/server/utils';
 
 export const GET = async ({ url }) => {
@@ -12,17 +12,18 @@ export const GET = async ({ url }) => {
 
 	if (paginate === 0) {
 		const getProducts = async () => {
-			const products = await db.product.findMany({
-				where: {
-					status: 'active',
-					name: {
-						search: `${search}:*`
-					},
-					desc: {
-						search: `${search}:*`
-					}
-				}
-			});
+			const products = [];
+			// 	await db.product.findMany({
+			// 	where: {
+			// 		status: 'active',
+			// 		name: {
+			// 			search: `${search}:*`
+			// 		},
+			// 		desc: {
+			// 			search: `${search}:*`
+			// 		}
+			// 	}
+			// });
 
 			return JSON.parse(JSON.stringify(products));
 		};
@@ -42,21 +43,22 @@ export const GET = async ({ url }) => {
 		});
 		const filterByUnits = url.searchParams.getAll('unit');
 
-		let { products, count } = await getProducts({
-			slug,
-			cursor,
-			search,
-			filterByProperties,
-			filterByUnits,
-			sortBy,
-			take
-		});
+		let { products, count } = {};
+		// 	await getProducts({
+		// 	slug,
+		// 	cursor,
+		// 	search,
+		// 	filterByProperties,
+		// 	filterByUnits,
+		// 	sortBy,
+		// 	take
+		// });
 
 		const found = products?.length > 0 ? true : false;
 
 		let prepareProducts = products;
 		if (!found && search) {
-			prepareProducts = await getPopularProducts({ take: 5 });
+			//	prepareProducts = await getPopularProducts({ take: 5 });
 		}
 
 		prepareProducts = prepareProducts.map(function (p: Product) {

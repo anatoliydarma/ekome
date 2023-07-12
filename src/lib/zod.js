@@ -2,7 +2,7 @@ import { z } from 'zod';
 // See https://zod.dev/?id=primitives for schema syntax
 
 export const addressSchema = z.object({
-	id: z.number().optional().nullable(),
+	id: z.string().optional().nullable(),
 	country: z.string().default('FR'),
 	city: z.string().min(1, { message: 'Required' }),
 	street: z.string().min(1, { message: 'Required' }),
@@ -23,7 +23,7 @@ export const userSchema = z.object({
 });
 
 export const categorySchema = z.object({
-	id: z.number().nullable(),
+	id: z.string().nullable(),
 	name: z.string(),
 	slug: z.string().optional(),
 	desc: z.string().optional().default(''),
@@ -33,7 +33,7 @@ export const categorySchema = z.object({
 });
 
 export const orderItems = z.object({
-	id: z.number().optional(),
+	id: z.string().optional(),
 	qty: z.number(),
 	price: z.coerce.number().multipleOf(0.01),
 	product_id: z.number(),
@@ -44,7 +44,7 @@ export const orderItems = z.object({
 });
 
 export const orderSchema = z.object({
-	id: z.number().nullable(),
+	id: z.string().nullable(),
 	number: z.string(),
 	status: z.string().default('processing'),
 	amount: z.coerce.number().multipleOf(0.01),
@@ -63,7 +63,7 @@ export const orderSchema = z.object({
 });
 
 export const productSchema = z.object({
-	id: z.number().nullable(),
+	id: z.string().nullable(),
 	name: z.string(),
 	slug: z.string().optional(),
 	desc: z.string().optional().default('').nullable(),
@@ -89,6 +89,6 @@ export const productSchema = z.object({
 });
 
 export const propertySchema = z.object({
-	id: z.number().nullable(),
+	id: z.string().nullable(),
 	name: z.string()
 });

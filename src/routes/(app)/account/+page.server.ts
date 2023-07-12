@@ -1,5 +1,4 @@
 import { error, fail } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
 import { message, superValidate } from 'sveltekit-superforms/server';
 import { userSchema } from '$lib/zod';
 

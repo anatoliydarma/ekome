@@ -1,6 +1,3 @@
-import { auth } from '$lib/server/lucia';
-import { Prisma } from '@prisma/client';
-import { LuciaError } from 'lucia-auth';
 import { fail, redirect } from '@sveltejs/kit';
 import { emailVerificationToken, sendEmail, serializeNonPOJOs } from '$lib/server/utils';
 import { PUBLIC_DOMAIN } from '$env/static/public';

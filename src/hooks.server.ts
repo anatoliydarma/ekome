@@ -1,13 +1,7 @@
 import { redirect } from '@sveltejs/kit';
-import { auth } from '$lib/server/lucia';
 import { sequence } from '@sveltejs/kit/hooks';
 import { PUBLIC_DOMAIN } from '$env/static/public';
 import { pb } from '$lib/server/pocketbase';
-
-// export const handleAuth = async ({ event, resolve }) => {
-// 	event.locals.auth = auth.handleRequest(event);
-// 	return await resolve(event);
-// };
 
 export const handleMiddleware = async ({ resolve, event }) => {
 	pb.authStore.loadFromCookie(event.request.headers.get('cookie') || '');

@@ -20,7 +20,6 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Id</th>
 					<th>Name</th>
 					<th>Sort</th>
 					<th>Status</th>
@@ -29,16 +28,15 @@
 			</thead>
 
 			<tbody>
-				{#each data.categories[0] as category}
+				{#each data.categories?.items as category}
 					<tr>
-						<td>{category.id}</td>
 						<td>{category.name}</td>
 						<td>{category.sort}</td>
 						<td>
 							{#if category.status}
 								<span class="badge-icon variant-filled-primary" />
 							{:else}
-								<span class="badge-icon variant-filled-secondary" />
+								<span class="badge-icon variant-filled" />
 							{/if}
 						</td>
 						<td>
@@ -51,6 +49,6 @@
 			</tbody>
 		</table>
 
-		<Pagination pagination={data.categories[1]} {url} />
+		<Pagination pagination={data.categories} {url} />
 	</div>
 </main>

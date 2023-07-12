@@ -2,6 +2,11 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { ORDER_STATUSES } from '$lib/consts';
 import { readable } from 'svelte/store';
 import { navigating } from '$app/stores';
+import { PUBLIC_POCKETBASE_URL } from '$env/static/public';
+
+export const getImageURL = (collectionId: string, recordId: string, fileName: string, size = '100x100') => {
+	return `${PUBLIC_POCKETBASE_URL}/api/files/${collectionId}/${recordId}/${fileName}?thumb=${size}`;
+};
 
 export function handleLoginRedirect(event: RequestEvent) {
 	const redirectTo = event.url.pathname + event.url.search;

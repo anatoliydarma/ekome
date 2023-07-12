@@ -3,21 +3,43 @@
 	import { page } from '$app/stores';
 	export let pagination: object;
 	export let url: string;
-	const pages = new Array(pagination.pageCount).fill(0);
+	const pages = new Array(pagination.totalPages).fill(0);
 
 	async function gotoPage(p: string) {
 		$page.url.searchParams.delete('page');
 		$page.url.searchParams.set('page', p);
 		url = `${url}?${$page.url.searchParams.toString()}`;
-		console.log(url);
+		// console.log(url);
 		await goto(url);
 		await invalidateAll();
 	}
 </script>
 
-{#if pagination.pageCount > 1}
+{#if pagination.totalPages > 1}
 	<nav aria-label="Page navigation" class="pt-4">
-		<ul class="inline-flex -space-x-px items-center">
+		<!-- {#if currentPage > 1}
+			<a href="/products">First</a>
+			<a href="/products/{currentPage - 1}">...</a>
+		{/if}
+		{#each [3, 2, 1] as i}
+			{#if currentPage - i > 0}
+				<a href="/products/{currentPage - i}">
+					{currentPage - i}
+				</a>
+			{/if}
+		{/each}
+		<span class="text-emerald-300">{currentPage}</span>
+		{#each Array(3) as _, i}
+			{#if currentPage + (i + 1) <= totalPages}
+				<a href="/products/{currentPage + (i + 1)}">{currentPage + (i + 1)}</a>
+			{/if}
+		{/each}
+		{#if currentPage < totalPages}
+			<a href="/products/{currentPage + 1}">...</a>
+			<a href="/products/{totalPages}">Last</a>
+		{/if} -->
+
+		<!-- <ul class="inline-flex -space-x-px items-center">
 			<li>
 				{#if pagination.previousPage}
 					<a
@@ -63,6 +85,6 @@
 					>
 				{/if}
 			</li>
-		</ul>
+		</ul> -->
 	</nav>
 {/if}

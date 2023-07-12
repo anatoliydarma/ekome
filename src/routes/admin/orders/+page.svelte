@@ -31,7 +31,7 @@
 			</thead>
 
 			<tbody>
-				{#each data.orders[0] as order}
+				{#each data?.orders?.items as order}
 					<tr>
 						<td>{dayjs(order.created_at).format('DD/MM/YYYY')}</td>
 						<td>{order.status}</td>
@@ -49,6 +49,6 @@
 			</tbody>
 		</table>
 
-		<Pagination pagination={data.orders[1]} {url} />
+		<Pagination pagination={data.orders} {url} />
 	</div>
 </main>

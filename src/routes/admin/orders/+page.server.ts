@@ -1,15 +1,12 @@
 import { error } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
 
-export const load = async ({ url }) => {
+export const load = async ({ url, locals }) => {
 	const getOrders = async () => {
 		const page = Number(url.searchParams.get('page') || 1);
 		const limit = 15;
 
-		const orders = await db.order.paginate().withPages({
-			limit: limit,
-			page: page,
-			includePageCount: true
+		const orders = await locals.pb.collection('orders').getList(page, limit, {
+			sort: '-created,id'
 		});
 
 		if (!orders) {

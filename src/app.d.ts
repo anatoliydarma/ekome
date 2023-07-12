@@ -1,4 +1,4 @@
-import type { PrismaClient } from '@prisma/client';
+
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
@@ -6,9 +6,6 @@ declare global {
 		interface Locals {
 			pb: import('pocketbase').default;
 			user: import('pocketbase').default['authStore']['model'];
-
-			/// <reference types="@sveltejs/kit" />
-			auth: import('lucia-auth').AuthRequest;
 			formData: Record<string, any>;
 		}
 		interface Error {
@@ -17,22 +14,6 @@ declare global {
 
 		// interface PageData {}
 		// interface Platform {}
-	}
-	var __prisma: PrismaClient;
-
-	/// <reference types="lucia-auth" />
-	declare namespace Lucia {
-		type Auth = import('$lib/server/lucia').Auth;
-		type UserAttributes = {
-			id: string?;
-			role: string;
-			email: string;
-			name: string?;
-			verified: boolean;
-			phone: string?;
-			active: boolean?;
-		};
-		type UserAttributes = import('@prisma/client').User;
 	}
 
 	interface Cart {
