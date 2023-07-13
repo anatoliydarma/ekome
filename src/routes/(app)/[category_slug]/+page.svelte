@@ -8,6 +8,7 @@
 	import IconLoader2 from '~icons/tabler/loader-2';
 
 	export let data: PageData;
+
 	const category = data.category;
 	let p = 0;
 	let count = 0;
@@ -51,10 +52,12 @@
 			await fetch(`/api/products?slug=${category.slug}&p=${p}&${$page.url.searchParams.toString()}`)
 				.then((res) => res.json())
 				.then((res) => {
-					newProducts = res.products;
-					p = res.p;
-					count = res.count ? res.count : count;
-					end = res.end;
+					console.log(res);
+
+					newProducts = res.items;
+					p = res.page;
+					count = res.totalItems;
+					end = res.items.length ? false : true;
 
 					setTimeout(() => {
 						loading = false;

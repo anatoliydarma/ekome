@@ -29,7 +29,7 @@ export const categorySchema = z.object({
 	desc: z.string().optional().default(''),
 	sort: z.number().optional().default(1),
 	status: z.boolean(),
-	image: z.string().array().optional()
+	image: z.string().optional()
 });
 
 export const orderItems = z.object({

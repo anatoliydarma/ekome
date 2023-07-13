@@ -17,6 +17,7 @@ export const handleMiddleware = async ({ resolve, event }) => {
 	event.locals.user = structuredClone(pb.authStore.model);
 
 	const response = await resolve(event);
+
 	response.headers.set('set-cookie', pb.authStore.exportToCookie({ httpOnly: false }));
 
 	if (event.url.pathname.startsWith('/account') && !event.locals.user) {

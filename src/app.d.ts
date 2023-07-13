@@ -1,4 +1,3 @@
-
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
@@ -90,6 +89,16 @@ declare global {
 		category_id: number?;
 		created_at: string?;
 		updated_at: string?;
+		expand: any;
+	}
+
+	interface Category {
+		id: string?;
+		name: string;
+		desc: string;
+		sort: number;
+		status: boolean;
+		images: string;
 	}
 }
 

@@ -1,8 +1,7 @@
 import { json } from '@sveltejs/kit';
-// import { db, getPopularProducts, getProducts } from '$lib/server/prisma';
 import { getCostOfProduct, getOrderByProduct } from '$lib/server/utils';
 
-export const GET = async ({ url }) => {
+export const GET = async ({ url, locals }) => {
 	let data = null;
 
 	const search: string | undefined = url.searchParams.get('search') || undefined;
@@ -43,7 +42,20 @@ export const GET = async ({ url }) => {
 		});
 		const filterByUnits = url.searchParams.getAll('unit');
 
-		let { products, count } = {};
+		let filter = null;
+		if (filterByProperties.length) {
+			filter = `properties ?= "${filterByProperties}"`;
+		}
+
+		if (filterByUnits.length) {
+			filter = filter ? ` && unite ?= "${filterByUnits}"` : `unite ?= "${filterByUnits}"`;
+		}
+
+		const products = await locals.pb.collection('products').getList(cursor, take, {
+			filter: filter
+		});
+
+		// let { products, count } = {};
 		// 	await getProducts({
 		// 	slug,
 		// 	cursor,
@@ -54,25 +66,19 @@ export const GET = async ({ url }) => {
 		// 	take
 		// });
 
-		const found = products?.length > 0 ? true : false;
+		const found = products.items?.length > 0 ? true : false;
 
 		let prepareProducts = products;
 		if (!found && search) {
 			//	prepareProducts = await getPopularProducts({ take: 5 });
 		}
 
-		prepareProducts = prepareProducts.map(function (p: Product) {
+		prepareProducts.items = prepareProducts.items.map(function (p: Product) {
 			p.price = getCostOfProduct(p);
 			return p;
 		});
 
-		data = {
-			products: prepareProducts,
-			p: products.length ? products[products.length - 1].id : 0,
-			found: found,
-			count: count ? count : null,
-			end: cursor != 0 && !found ? true : false
-		};
+		data = prepareProducts;
 	}
 
 	return json(data);

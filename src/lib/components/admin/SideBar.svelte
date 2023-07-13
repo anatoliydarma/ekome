@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { drawerStore, LightSwitch, autoModeWatcher } from '@skeletonlabs/skeleton';
 
-	import IconUsers from '~icons/tabler/users';
 	import IconDashboard from '~icons/tabler/dashboard';
 	import IconCategory2 from '~icons/tabler/category-2';
-	import IconFolders from '~icons/tabler/folders';
-	import IconTags from '~icons/tabler/tags';
 	import IconShoppingCart from '~icons/tabler/shopping-cart';
 
 	import { page } from '$app/stores';
@@ -30,21 +27,6 @@
 			name: 'Products',
 			url: '/admin/products',
 			icon: IconCategory2
-		},
-		{
-			name: 'Categories',
-			url: '/admin/categories',
-			icon: IconFolders
-		},
-		{
-			name: 'Properties',
-			url: '/admin/properties',
-			icon: IconTags
-		},
-		{
-			name: 'Users',
-			url: '/admin/users',
-			icon: IconUsers
 		}
 	];
 </script>

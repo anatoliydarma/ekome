@@ -11,40 +11,20 @@ import { pb } from './pocketbase';
 import slugify from 'slugify';
 const url = env.PRIVATE_SLACK_WEBHOOK_URL_STORE;
 
-export async function save(collection: string, record: any, create = false) {
+export async function save(collection: string, record: any) {
 	// convert obj to FormData in case one of the fields is instanceof FileList
-	const data = object2formdata(record);
-	if (record.id && !create) {
-		// "create" flag overrides update
+
+	// const data = object2formdata(record);
+	const data = record;
+	if (record.id) {
 		return await pb.collection(collection).update(record.id, data);
 	} else {
+		if (['categories', 'products'].includes(collection)) {
+			data.slug = await getUniqueSlug(data.name, collection);
+		}
+
 		return await pb.collection(collection).create(data);
 	}
-}
-// convert obj to FormData in case one of the fields is instanceof FileList
-function object2formdata(obj: {}) {
-	// check if any field's value is an instanceof FileList
-	if (!Object.values(obj).some((val) => val instanceof FileList || val instanceof File)) {
-		// if not, just return the original object
-		return obj;
-	}
-	// otherwise, build FormData from obj
-	const fd = new FormData();
-	for (const [key, val] of Object.entries(obj)) {
-		if (val instanceof FileList) {
-			for (const file of val) {
-				fd.append(key, file);
-			}
-		} else if (val instanceof File) {
-			// handle File before "object" so that it doesn't get serialized as JSON
-			fd.append(key, val);
-		} else if (typeof val === 'object') {
-			fd.append(key, JSON.stringify(val));
-		} else {
-			fd.append(key, val as any);
-		}
-	}
-	return fd;
 }
 
 export async function getUniqueSlug(slug: string, collection: string, count = 0) {
