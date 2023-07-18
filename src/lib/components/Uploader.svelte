@@ -7,7 +7,7 @@
 
 	import Sortlist from './Sortlist.svelte';
 
-	export let uploaded: string[] = [];
+	export let uploaded: string | string[] = '';
 	export let name: string = 'image';
 	export let filename: string = 'image';
 	export let multiple: boolean = false;
@@ -42,7 +42,7 @@
 				console.error(err);
 			});
 	};
-	const handleRemoveFile = async (image: string, i: number) => {
+	const handleRemoveFile = async (image: string, i: number | null) => {
 		await fetch('/api/upload', {
 			method: 'DELETE',
 			headers: {
@@ -65,9 +65,12 @@
 						background: 'variant-ghost-error'
 					});
 				}
-				uploaded.splice(i, 1);
-
-				uploaded = uploaded.length < 1 ? [] : uploaded;
+				if (i) {
+					uploaded.splice(i, 1);
+					uploaded = uploaded.length < 1 ? [] : uploaded;
+				} else {
+					uploaded = '';
+				}
 			})
 			.catch((err) => {
 				console.error(err);
@@ -100,24 +103,43 @@
 
 	<input type="hidden" {name} bind:value={uploaded} />
 
-	{#if uploaded && uploaded?.length > 0}
-		<Sortlist bind:list={uploaded} let:item let:index>
+	{#if uploaded}
+		{#if typeof uploaded === 'string'}
 			<div class="relative w-32 h-32 group">
 				<!-- svelte-ignore a11y-img-redundant-alt -->
 				<img
-					src="/assets/{item}"
+					src="/assets/{uploaded}"
 					alt="image"
 					class="object-cover w-32 h-32 rounded-lg cursor-move"
 				/>
 
 				<button
 					type="button"
-					on:click={() => handleRemoveFile(item, index)}
+					on:click={() => handleRemoveFile(uploaded, null)}
 					class="absolute -top-3 -right-3 text-primary-600 rounded-full bg-white p-1 hover:text-red-600 invisible group-hover:visible"
 				>
 					<IconX class="w-5 h-5" />
 				</button>
 			</div>
-		</Sortlist>
+		{:else if uploaded?.length > 0}
+			<Sortlist bind:list={uploaded} let:item let:index>
+				<div class="relative w-32 h-32 group">
+					<!-- svelte-ignore a11y-img-redundant-alt -->
+					<img
+						src="/assets/{item}"
+						alt="image"
+						class="object-cover w-32 h-32 rounded-lg cursor-move"
+					/>
+
+					<button
+						type="button"
+						on:click={() => handleRemoveFile(item, index)}
+						class="absolute -top-3 -right-3 text-primary-600 rounded-full bg-white p-1 hover:text-red-600 invisible group-hover:visible"
+					>
+						<IconX class="w-5 h-5" />
+					</button>
+				</div>
+			</Sortlist>
+		{/if}
 	{/if}
 </div>

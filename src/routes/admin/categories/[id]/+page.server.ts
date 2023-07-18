@@ -28,35 +28,36 @@ export const actions = {
 			return fail(400, { form });
 		}
 
-		let image = form.data.image && form.data.image[0].length > 0 ? form.data.image : [];
-
 		try {
-			if (!form.data.id) {
-				await db.category.create({
-					data: {
-						name: form.data.name,
-						status: form.data.status,
-						desc: form.data.desc,
-						sort: form.data.sort,
-						image: image
-					}
-				});
-			} else {
+			if (form.data.id) {
 				await db.category.update({
 					where: {
 						id: form.data.id
 					},
 					data: {
 						name: form.data.name,
+						slug: form.data.slug,
 						status: form.data.status,
 						desc: form.data.desc,
 						sort: form.data.sort,
-						image: image
+						image: form.data.image
+					}
+				});
+			} else {
+				await db.category.create({
+					data: {
+						name: form.data.name,
+						slug: form.data.slug,
+						status: form.data.status,
+						desc: form.data.desc,
+						sort: form.data.sort,
+						image: form.data.image
 					}
 				});
 			}
 		} catch (e) {
-			return fail(400, { e });
+			console.error(e);
+			return fail(400, { data: JSON.stringify(e) });
 		}
 
 		throw redirect(303, '/admin/categories');

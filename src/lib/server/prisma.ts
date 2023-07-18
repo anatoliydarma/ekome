@@ -16,32 +16,32 @@ if (dev) {
 	global.__prisma__ = db;
 }
 
-db.$extends({
-	name: `slug`
-	// TODO check unique slug
-	// source(params) {
-	// 	return getName(params.args.data.name, params.args.data.name_2);
-	// },
-	// async slugify(source, params) {
-	// 	const method = camelCase(params.model);
+// db.$extends({
+// 	name: `slug`,
+// 	// TODO check unique slug
+// 	source(params) {
+// 		return getName(params.args.data.name, params.args.data.name_2);
+// 	},
+// 	async slugify(source, params) {
+// 		const method = camelCase(params.model);
 
-	// 	const collection = db[method];
-	// 	let slug = slugify(getName(params.args.data.name, params.args.data.name_2), {
-	// 		lower: true,
-	// 		strict: true,
-	// 		remove: /[*+~.()'"!:@]/g
-	// 	});
+// 		const collection = db[method];
+// 		let slug = slugify(getName(params.args.data.name, params.args.data.name_2), {
+// 			lower: true,
+// 			strict: true,
+// 			remove: /[*+~.()'"!:@]/g
+// 		});
 
-	// 	let attempt = 0;
+// 		let attempt = 0;
 
-	// 	while ((await collection.count({ where: { slug } })) > 0) {
-	// 		attempt += 1;
-	// 		slug = `${slug}-${attempt}`;
-	// 	}
+// 		while ((await collection.count({ where: { slug } })) > 0) {
+// 			attempt += 1;
+// 			slug = `${slug}-${attempt}`;
+// 		}
 
-	// 	return slug;
-	// }
-});
+// 		return slug;
+// 	}
+// });
 
 const getProducts = async (params: any) => {
 	let products;

@@ -24,11 +24,11 @@ export const userSchema = z.object({
 export const categorySchema = z.object({
 	id: z.number().nullable(),
 	name: z.string(),
-	slug: z.string().optional(),
+	slug: z.string(),
 	desc: z.string().optional().default(''),
 	sort: z.number().optional().default(1),
 	status: z.boolean(),
-	image: z.string().array().optional()
+	image: z.string().optional()
 });
 
 export const orderItems = z.object({

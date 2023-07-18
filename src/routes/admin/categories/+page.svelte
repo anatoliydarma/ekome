@@ -38,7 +38,7 @@
 							{#if category.status}
 								<span class="badge-icon variant-filled-primary" />
 							{:else}
-								<span class="badge-icon variant-filled-secondary" />
+								<span class="badge-icon variant-filled" />
 							{/if}
 						</td>
 						<td>

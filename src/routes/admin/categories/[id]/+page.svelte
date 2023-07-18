@@ -6,9 +6,7 @@
 	import Helper from '$lib/components/Helper.svelte';
 	export let data;
 
-	const { form, errors, enhance, constraints, message } = superForm(data.form, {
-		dataType: 'json'
-	});
+	const { form, errors, enhance, constraints, message } = superForm(data.form);
 </script>
 
 <svelte:head>
@@ -25,7 +23,7 @@
 	</div>
 
 	<div class="px-6 max-w-screen-md">
-		<form method="POST" action="?/save" use:enhance>
+		<form method="POST" action="?/save" enctype="multipart/form-data" use:enhance>
 			<input type="hidden" name="id" value={$form.id} />
 
 			<div class="space-y-4">
@@ -48,6 +46,40 @@
 					</div>
 
 					<div class="w-full max-w-xs">
+						<label for="slug" class="block pb-1 label">Slug</label>
+						<input
+							class="input"
+							type="text"
+							bind:value={$form.slug}
+							aria-invalid={$errors.slug ? 'true' : undefined}
+							{...$constraints.slug}
+							id="slug"
+							name="slug"
+							placeholder="Category slug"
+						/>
+						{#if $errors.slug}
+							<Helper>{$errors.slug}</Helper>
+						{/if}
+					</div>
+
+					<div class="w-full">
+						<label for="desc" class="block pb-1 label">Desc</label>
+						<textarea
+							bind:value={$form.desc}
+							aria-invalid={$errors.desc ? 'true' : undefined}
+							{...$constraints.desc}
+							id="desc"
+							name="desc"
+							placeholder="desc"
+							class="textarea"
+							rows="4"
+						/>
+						{#if $errors.desc}
+							<Helper>{$errors.desc}</Helper>
+						{/if}
+					</div>
+
+					<div class="w-full max-w-xs">
 						<label for="sort" class="block pb-1 label">Sort</label>
 						<input
 							type="number"
@@ -64,23 +96,7 @@
 						{/if}
 					</div>
 
-					<div class="w-full max-w-xs">
-						<label for="desc" class="block pb-1 label">Desc</label>
-						<textarea
-							bind:value={$form.desc}
-							aria-invalid={$errors.desc ? 'true' : undefined}
-							{...$constraints.desc}
-							id="desc"
-							name="desc"
-							placeholder="desc"
-							class="textarea"
-						/>
-						{#if $errors.desc}
-							<Helper>{$errors.desc}</Helper>
-						{/if}
-					</div>
-
-					<div class="w-full max-w-xs pt-6">
+					<div class="w-full max-w-xs pt-8">
 						<SlideToggle name="status" bind:checked={$form.status} active="bg-primary-500"
 							>Status</SlideToggle
 						>
