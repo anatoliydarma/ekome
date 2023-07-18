@@ -1,13 +1,23 @@
 import lucia from 'lucia-auth';
 import { sveltekit } from 'lucia-auth/middleware';
-import prisma from '@lucia-auth/adapter-prisma';
+import { mysql2 } from '@lucia-auth/adapter-mysql';
+import mysql from 'mysql2/promise';
 import { dev } from '$app/environment';
-import { db } from '$lib/server/prisma';
 import { idToken } from '@lucia-auth/tokens';
+import { env } from '$env/dynamic/private';
+const dbUsername = env.DB_USERNAME;
+const dbPassword = env.DB_PASSWORD;
+const dbDatabase = env.DB_DATABASE;
+
+const poolConnection = mysql.createPool({
+	user: dbUsername,
+	database: dbDatabase,
+	password: dbPassword
+});
 
 export const auth = lucia({
 	env: dev ? 'DEV' : 'PROD',
-	adapter: prisma(db),
+	adapter: mysql2(poolConnection),
 	middleware: sveltekit(),
 	transformDatabaseUser: (userData: any) => {
 		return {

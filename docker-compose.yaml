@@ -1,20 +1,36 @@
 version: '3.5'
 
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
+  mysql:
+    container_name: mysql_ekome
+    image: mysql:latest
+    restart: on-failure
     ports:
-      - '5432:5432'
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - 'mysql:/var/lib/mysql'
     networks:
-      - postgres
-    restart: unless-stopped
+      - web
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mysql:mysql
+    ports:
+      - 8080:80
+    environment:
+      MYSQL_USERNAME: '${DB_USERNAME}'
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      PMA_HOST: mysql
+    networks:
+      - web
 
   mailpit:
     image: 'axllent/mailpit:latest'
@@ -24,12 +40,11 @@ services:
       - '${FORWARD_MAILPIT_PORT:-1025}:1025'
       - '${FORWARD_MAILPIT_UI_PORT:-8025}:8025'
     networks:
-      - postgres
+      - web
 
 networks:
-  postgres:
+  web:
     driver: bridge
-
 volumes:
-  postgres:
-  pgadmin:
+  mysql:
+    driver: local

@@ -6,7 +6,9 @@
 	import Helper from '$lib/components/Helper.svelte';
 	export let data;
 
-	const { form, errors, enhance, constraints, message } = superForm(data.form);
+	const { form, errors, enhance, constraints, message } = superForm(data.form, {
+		dataType: 'json'
+	});
 </script>
 
 <svelte:head>

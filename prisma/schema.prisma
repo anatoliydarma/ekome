@@ -3,11 +3,11 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["clientExtensions", "extendedWhereUnique", "fullTextSearch"]
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "mysql"
     url      = env("DATABASE_URL")
 }
 
@@ -75,7 +75,7 @@ model Product {
     container_price Decimal?   @db.Decimal(10,2) @default(0)
     gst     Int?           @default(3)
 
-    created_at   DateTime  @default(now()) @db.Date
+    created_at   DateTime  @default(now()) @db.Timestamp(0)
     updated_at   DateTime  @updatedAt
 
     category_id Int
@@ -145,7 +145,7 @@ model Order {
     amount      Decimal     @db.Decimal(10,2)
     shipping_cost    Decimal     @db.Decimal(10,2)
     tax_cost         Decimal     @db.Decimal(10,2)
-    created_at   DateTime    @default(now()) @db.Date
+    created_at   DateTime    @default(now()) @db.Timestamp(0)
     updated_at   DateTime    @updatedAt
     weight  Int?
 
@@ -202,7 +202,7 @@ model Address {
 model Cart {
     id String @id
     user_id String?
-    created_at DateTime @default(now())
+    created_at DateTime @default(now()) @db.Timestamp(0)
     updated_at DateTime @updatedAt
 
     items CartItem[]

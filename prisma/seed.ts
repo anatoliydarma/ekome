@@ -24,28 +24,28 @@ async function main() {
 			expires: null
 		}
 	});
-	await prisma.category.upsert({
-		where: { id: 1 },
-		update: {},
-		create: {
-			id: 1,
-			name: 'Body care',
-			slug: 'soap',
-			status: true,
-			sort: 1
-		}
-	});
-	await prisma.category.upsert({
-		where: { id: 4 },
-		update: {},
-		create: {
-			id: 4,
-			name: 'Pets',
-			slug: 'pets',
-			status: true,
-			sort: 1
-		}
-	});
+	// await prisma.category.upsert({
+	// 	where: { id: 1 },
+	// 	update: {},
+	// 	create: {
+	// 		id: 1,
+	// 		name: 'Body care',
+	// 		slug: 'soap',
+	// 		status: true,
+	// 		sort: 1
+	// 	}
+	// });
+	// await prisma.category.upsert({
+	// 	where: { id: 1 },
+	// 	update: {},
+	// 	create: {
+	// 		id: 1,
+	// 		name: 'Pets',
+	// 		slug: 'pets',
+	// 		status: true,
+	// 		sort: 1
+	// 	}
+	// });
 }
 main()
 	.then(async () => {

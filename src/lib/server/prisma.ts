@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import pagination from 'prisma-extension-pagination';
 import slugify from 'slugify';
 import camelCase from 'camelcase';
