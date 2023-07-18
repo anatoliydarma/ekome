@@ -68,11 +68,11 @@ export const productSchema = z.object({
 	desc: z.string().optional().default('').nullable(),
 	sku: z.string().optional().default('').nullable(),
 	upc: z.coerce.number().optional().default(0).nullable(),
-	unit: z.string().default('PIECES'),
+	unit: z.string().default('piece'),
 	price: z.coerce.number().multipleOf(0.01).optional().default(0),
-	gst: z.number(),
-	min_qty: z.coerce.number().optional(),
-	status: z.string().default('DRAFT'),
+	gst: z.number().default(1),
+	min_qty: z.coerce.number().optional().default(1),
+	status: z.string().default('draft'),
 	category_id: z.number(),
 	images: z.string().array().optional().nullable(),
 	properties: z
@@ -81,7 +81,8 @@ export const productSchema = z.object({
 			name: z.string().min(2)
 		})
 		.array()
-		.optional(),
+		.optional()
+		.nullable(),
 	brand: z.string().optional().nullable(),
 	country: z.string().optional().nullable(),
 	weight: z.coerce.number().optional().default(0).nullable()

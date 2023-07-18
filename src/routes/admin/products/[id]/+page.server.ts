@@ -1,8 +1,9 @@
-import { db } from '$lib/server/prisma';
+import { db, getSlug } from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 import { PRODUCT_STATUSES, PRODUCT_UNITS, BRANDS, COUNTRIES, GST } from '$lib/consts';
 import { superValidate } from 'sveltekit-superforms/server';
 import { productSchema } from '$lib/zod';
+import { getName } from '$lib/server/utils';
 
 export const load = async ({ params }) => {
 	let id: any = Number(params.id);
@@ -68,11 +69,14 @@ export const actions = {
 
 		let properties = form.data.properties ? form.data.properties : [];
 
+		const slug = await getSlug(form.data.name, 'product');
+
 		try {
 			if (!form.data.id) {
 				await db.product.create({
 					data: {
 						name: form.data.name,
+						slug: slug,
 						status: form.data.status,
 						desc: form.data.desc,
 						sku: form.data.sku,
@@ -138,12 +142,12 @@ export const actions = {
 	},
 
 	delete: async ({ request }) => {
-		const values = await request.formData();
-		const id = !isNaN(Number(values.get('id'))) ? Number(values.get('id')) : undefined;
+		const formData = await request.formData();
+		const form = await superValidate(formData, productSchema);
 		try {
 			const deleteUser = await db.product.delete({
 				where: {
-					id: id
+					id: form.data.id
 				}
 			});
 		} catch (e) {

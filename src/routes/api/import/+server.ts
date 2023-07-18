@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { db } from '$lib/server/prisma';
+import { db, getSlug } from '$lib/server/prisma';
 import slugify from 'slugify';
 import { getName } from '$lib/server/utils';
 
@@ -12,9 +12,12 @@ export const POST = async ({ request }) => {
 		});
 
 		if (!product) {
+			const slug = await getSlug(getName(row.name, row.name_2), 'product');
+
 			await db.product.create({
 				data: {
 					name: getName(row.name, row.name_2),
+					slug: slug,
 					sub_name: row.sub_name ? row.sub_name : '',
 					status: row.status,
 					desc: `${row.desc ? row.desc : ''}<br /><br />${checkData(row.ingredients, 'Ingredients')}
@@ -27,23 +30,8 @@ export const POST = async ({ request }) => {
 					container_price: row.container_price,
 					min_qty: row.min_qty,
 					category: {
-						connectOrCreate: {
-							create: {
-								name: row.category,
-								status: true,
-								slug: slugify(row.category, {
-									lower: true,
-									strict: true,
-									remove: /[*+~.()'"!:@]/g
-								})
-							},
-							where: {
-								slug: slugify(row.category, {
-									lower: true,
-									strict: true,
-									remove: /[*+~.()'"!:@]/g
-								})
-							}
+						connect: {
+							id: row.category
 						}
 					},
 					weight: row.weight,

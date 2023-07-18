@@ -32,7 +32,7 @@
 			editorProps: {
 				attributes: {
 					class:
-						'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none h-full px-3 pb-2 min-h-[200px] w-full'
+						'prose  focus:outline-none h-full px-3 py-2 min-h-[200px] w-full dark:text-surface-200'
 				}
 			},
 			onTransaction: () => {

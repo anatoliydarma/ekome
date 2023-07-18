@@ -43,7 +43,7 @@ table tr td {
 .radio,
 .select,
 .textarea {
-	@apply bg-primary-50 border-primary-300 placeholder:text-surface-200 dark:placeholder:text-surface-400 disabled:cursor-not-allowed disabled:opacity-75;
+	@apply bg-primary-50 dark:bg-surface-800 border-primary-300 placeholder:text-surface-200 dark:placeholder:text-surface-400 disabled:cursor-not-allowed disabled:opacity-75;
 }
 
 .table {

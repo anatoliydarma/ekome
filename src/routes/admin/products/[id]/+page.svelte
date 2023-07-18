@@ -30,6 +30,8 @@
 
 	<div>
 		<form method="POST" action="?/save" class="max-w-2xl" enctype="multipart/form-data" use:enhance>
+
+			{$form.id}
 			<input type="hidden" name="id" value={$form.id} />
 
 			<div class="grid gap-6 grid-cols-2">
@@ -256,6 +258,10 @@
 					id="properties"
 					bind:value={$form.properties}
 				/>
+				{#if $errors.properties}
+					<Helper>{$errors.properties}</Helper>
+				{/if}
+				{JSON.stringify($errors.properties)}
 			</div>
 
 			<div class="w-full">

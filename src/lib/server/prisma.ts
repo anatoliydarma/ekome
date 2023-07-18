@@ -19,7 +19,7 @@ if (dev) {
 // db.$extends({
 // 	name: `slug`,
 // 	// TODO check unique slug
-// 	source(params) {
+// 	source(params: any) {
 // 		return getName(params.args.data.name, params.args.data.name_2);
 // 	},
 // 	async slugify(source, params) {
@@ -227,4 +227,22 @@ const getPopularProducts = async (params: any) => {
 	});
 };
 
-export { db, getProducts, getPopularProducts, countProducts };
+const getSlug = async (name: any, collectionName: string) => {
+	const collection = db[collectionName];
+	let slug = slugify(name, {
+		lower: true,
+		strict: true,
+		remove: /[*+~.()'"!:@]/g
+	});
+
+	let attempt = 0;
+
+	while ((await collection.count({ where: { slug } })) > 0) {
+		attempt += 1;
+		slug = `${slug}-${attempt}`;
+	}
+
+	return slug;
+};
+
+export { db, getProducts, getPopularProducts, countProducts, getSlug };

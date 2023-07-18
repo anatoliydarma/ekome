@@ -58,7 +58,7 @@ model Product {
     sub_name    String?
     slug    String         @unique
     brand    String?
-    desc    String?
+    desc    String?        @db.Text
 
     country     String?
     sku     String?
