@@ -4,5 +4,7 @@
 
 - Svelte
 - SvelteKit
+- Tailwind
+- Skeleton (UI)
 - Prisma
-- Postgresql
+- Mysql

@@ -4,7 +4,7 @@
 </script>
 
 <a
-	class="space-y-2 unstyled group overflow-hidden"
+	class="space-y-2 unstyled group overflow-hidden rounded-lg"
 	href="/{categorySlug}/{product.slug}"
 	title={product.name}
 >
