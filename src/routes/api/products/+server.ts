@@ -45,7 +45,6 @@ export const GET = async ({ url }) => {
 		let { products, count } = await getProducts({
 			slug,
 			cursor,
-			search,
 			filterByProperties,
 			filterByUnits,
 			sortBy,

@@ -2,6 +2,7 @@ import type { RequestEvent } from '@sveltejs/kit';
 import { ORDER_STATUSES } from '$lib/consts';
 import { readable } from 'svelte/store';
 import { navigating } from '$app/stores';
+import { BOX_WEIGHT } from '$lib/consts';
 
 export function handleLoginRedirect(event: RequestEvent) {
 	const redirectTo = event.url.pathname + event.url.search;
@@ -132,4 +133,27 @@ export const pluralize = (val: number, word: string, plural = word + 's') => {
 
 export const niceGrams = (grams: number) => {
 	return grams >= 1000 ? grams / 1000 : grams;
+};
+
+export const getCost = (item: CartItem) => {
+	return (item.price * item.qty).toFixed(1);
+};
+
+export const getOrderSubtotal = (items: CartItem[]) => {
+	return Number(
+		items?.reduce((total: number, item: CartItem) => total + item.price * item.qty, 0).toFixed(1)
+	);
+};
+
+export const getOrderTotal = (order: Order) => {
+	return (Number(order.amount) + Number(order.shipping_cost) + Number(order.tax_cost)).toFixed(1);
+};
+
+export const getOrderWeight = (items: CartItem[]) => {
+	return (
+		items?.reduce(
+			(total: number, item: CartItem) => Number(niceGrams(item.weight)) * item.qty + Number(total),
+			0
+		) + BOX_WEIGHT
+	);
 };

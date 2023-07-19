@@ -289,6 +289,7 @@
 								onResult: ({ result }) => {
 									if (result.type == 'success') {
 										addNew = false;
+
 										getAddresses();
 									}
 								}

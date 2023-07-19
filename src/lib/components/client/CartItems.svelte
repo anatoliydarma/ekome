@@ -2,6 +2,7 @@
 	import { cartStore } from '$lib/stores/shop';
 	import SelectQty from '$lib/components/SelectQty.svelte';
 	import type { CartItem } from './$types';
+	import { getCost } from '$lib/client/utils';
 	export let cart: any;
 	export let showQty: boolean = true;
 	export let showRemove: boolean = true;
@@ -43,10 +44,6 @@
 					console.error(data);
 				}
 			});
-	}
-
-	function getCost(item: CartItem) {
-		return ((item.price * item.qty) / item.weight).toFixed(1);
 	}
 
 	$: $cartStore = cart;

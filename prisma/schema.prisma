@@ -3,7 +3,7 @@
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -86,6 +86,10 @@ model Product {
     favourites Favourites[]
     cart_items CartItem[]
 
+    @@fulltext([name])
+    @@fulltext([sub_name])
+    @@fulltext([desc])
+    @@fulltext([brand])
     @@unique([slug, id])
     @@index([slug, id])
     @@map("product")
@@ -165,6 +169,7 @@ model Order {
     @@unique([number, id])
     @@index([id, number])
     @@map("order")
+    @@fulltext([number])
 }
 
 model OrderItems {

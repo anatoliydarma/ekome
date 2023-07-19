@@ -26,7 +26,7 @@
 </svelte:head>
 
 <main class="px-4 max-w-screen-xl mx-auto space-y-3">
-	<h4>My favourites products</h4>
+	<h4 class="pb-4">My favourites products</h4>
 	<div>
 		<div class="grid gap-8 grid-cols-4 h-full">
 			{#each favourites as item}

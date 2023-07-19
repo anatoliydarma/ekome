@@ -7,31 +7,18 @@
 	import { order } from '$lib/stores/shop';
 	import { onMount } from 'svelte';
 	import Payment from '$lib/components/client/Payment.svelte';
-	import { niceGrams } from '$lib/client/utils';
+	import { getOrderSubtotal, getOrderTotal, getOrderWeight, niceGrams } from '$lib/client/utils';
 	import { getCostOfDeliveryAndVat } from '$lib/client/delivery';
-	import { BOX_WEIGHT } from '$lib/consts';
 	import { PUBLIC_APP_NAME } from '$env/static/public';
 	export let data;
 
 	let showPayment = false;
 	let vatProcent: number | null = null;
 
-	$: $order.amount = Number(
-		$cartStore.items
-			?.reduce((total: number, item: CartItem) => total + (item.price * item.qty) / item.weight, 0)
-			.toFixed(1)
-	);
+	$: $order.amount = getOrderSubtotal($cartStore?.items);
 	$: $order.shipping_cost = 0;
 	$: $order.tax_cost = 0;
-
-	// TODO calc properly
-	$: $order.weight =
-		$cartStore.items?.reduce(
-			(total: number, item: CartItem) => Number(niceGrams(item.weight)) * item.qty + Number(total),
-			0
-		) + BOX_WEIGHT;
-
-	$: $cartStore = $cartStore;
+	$: $order.weight = getOrderWeight($cartStore?.items); // TODO calc properly
 
 	$: if ($order.client_country) {
 		let calcCost = getCostOfDeliveryAndVat($order);
@@ -185,11 +172,7 @@
 						<div class="flex items-center justify-between border-t border-primary-200 pt-6">
 							<div class="text-base font-medium">Total</div>
 							<div class="text-base font-medium text-primary-900">
-								€ {(
-									Number($order.amount) +
-									Number($order.shipping_cost) +
-									Number($order.tax_cost)
-								).toFixed(1)}
+								€ {getOrderTotal($order)}
 							</div>
 						</div>
 					</div>

@@ -26,7 +26,7 @@
 <Html lang="en">
 	<Container>
 		<Img
-			src={`${PUBLIC_DOMAIN}/img/goprobiotic-logo.svg`}
+			src={`${PUBLIC_DOMAIN}/img/ekome-logo.svg`}
 			width="85"
 			height="36"
 			alt={PUBLIC_APP_NAME}

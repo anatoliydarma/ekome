@@ -4,7 +4,6 @@
 	import { cartStore } from '$lib/stores/shop';
 	import IconX from '~icons/tabler/x';
 	import Loading from '$lib/components/Loading.svelte';
-	import type { CartItem, Cart } from './$types';
 	import { browser } from '$app/environment';
 	import { niceGrams } from '$lib/client/utils';
 	export let cart: Cart;
@@ -22,7 +21,7 @@
 	}
 
 	$: totalAmount = $cartStore.items.reduce(
-		(total: number, item: CartItem) => total + (item.price * item.qty) / item.weight,
+		(total: number, item: CartItem) => total + item.price * item.qty,
 		0
 	);
 

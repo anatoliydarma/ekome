@@ -30,7 +30,6 @@
 
 	<div>
 		<form method="POST" action="?/save" class="max-w-2xl" enctype="multipart/form-data" use:enhance>
-
 			{$form.id}
 			<input type="hidden" name="id" value={$form.id} />
 
@@ -261,7 +260,6 @@
 				{#if $errors.properties}
 					<Helper>{$errors.properties}</Helper>
 				{/if}
-				{JSON.stringify($errors.properties)}
 			</div>
 
 			<div class="w-full">

@@ -36,12 +36,12 @@
 	</ol>
 
 	<div class="flex flex-col md:flex-row gap-12 pt-8">
-		<div class=" w-full md:w-7/12">
+		<div class="w-full md:w-7/12">
 			<div class="w-full">
 				<img
 					src={mainImage ? `/assets/${mainImage}` : '/img/noimage.svg'}
 					alt={product.name}
-					class="h-auto w-full bg-primary-50"
+					class="max-h-[460px] h-auto w-full bg-primary-50 object-cover"
 				/>
 			</div>
 

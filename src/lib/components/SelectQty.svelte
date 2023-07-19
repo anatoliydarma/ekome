@@ -8,7 +8,10 @@
 	export let isInCart: boolean = false;
 	export let minQty: number = 1;
 	export let qty: number = 1;
-	$: qty = minQty;
+
+	$: if (qty < minQty) {
+		qty = minQty;
+	}
 
 	function decrement() {
 		qty = qty == minQty ? minQty : qty - minQty;
